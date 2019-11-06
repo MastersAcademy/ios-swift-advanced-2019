@@ -1,0 +1,221 @@
+## Fastlane CheatSheet
+# How to install dependencies for fastlane (sample on the cocoapods): 
+# https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041
+
+default_platform :ios
+
+platform :ios do
+
+    before_all do 
+        #xcode_select("/Applications/Xcode_10.3.app")
+        #xcversion(version: "10.3")
+        import "./Fastfile.Utils.Crypto"
+    end
+
+    desc "Get cert ID for manual encrypt for match"
+    lane :get_cert_id do
+        itunes_connect_email = ENV["DELIVER_USER"]
+        if itunes_connect_email == nil
+            UI.crash! "Could not find variable for DELIVER_USER. Pls define it in CI Variables or bash_profile"
+        end
+
+        fastlane_require 'spaceship'
+        Spaceship.login(itunes_connect_email)
+        Spaceship.select_team
+        Spaceship.certificate.all.each do |cert|
+        cert_type = Spaceship::Portal::Certificate::CERTIFICATE_TYPE_IDS[cert.type_display_id].to_s.split("::")[-1]
+        puts "Cert id: #{cert.id}, name: #{cert.name}, expires: #{cert.expires.strftime("%Y-%m-%d")}, type: #{cert_type}"
+    end
+
+    desc "Install cocoapods "
+    lane :install_pods do
+      cocoapods(
+        use_bundle_exec: false
+      )
+    end
+
+    desc "Match and build template"
+    lane :match_and_build do 
+
+        # Git repo list
+        #profiles/development/Development_your.bundle.id.mobileprovision
+        #profiles/adhoc/AdHoc_your.bundle.id.mobileprovision
+        #profiles/appstore/AppStore_your.bundle.id.mobileprovision
+        #certs/development/CERT_ID_DEV.cer
+        #certs/development/CERT_ID_DEV.p12
+        #certs/distribution/CERT_ID_DIST.cer
+        #certs/distribution/CERT_ID_DEV.p12
+
+        match(
+            type: match_type,
+            app_identifier: match_identifier,
+            readonly: true,
+            git_branch: git_branch,
+            verbose: true
+        )
+
+        if match_type == 'adhoc' and gym_method == 'ad-hoc'
+            additional_export_options = {
+              compileBitcode: false
+            }
+        else
+            additional_export_options = {}
+        end
+      
+        gym(
+            scheme: gym_scheme,
+            export_method: gym_method,
+            clean: isNeedClean,
+            skip_package_ipa: isNeedSkipIpaPackage,
+            #Two options below used for correct crash report.
+            #See:
+            #1. https://github.com/fastlane/fastlane/issues/10902#issuecomment-346479070
+            #2. https://github.com/fastlane/fastlane/issues/10133#issuecomment-336694615
+            export_options: additional_export_options
+        )
+
+        #Try to upload build to appstore
+        #We define credentionals using DELIVERY_USER and DELIVERY_PASS
+        appstore(
+            app_identifier: app_identifier, # app identifier in itunes connect for release version
+            skip_screenshots: true, # (true) do not need to upload screenshoots
+            run_precheck_before_submit: false, # (false) do not need to send for submit
+            force: true, # (true) do not need to send report via html
+            username: username
+        )
+    end
+
+    desc "Make changelog from previous tag (not current) to current commit with filter (filter)"
+    lane :make_filtered_changelog do |values|
+        filter = values[:filter]
+        last_tag = last_git_tag
+        filtered_tags = get_filtered_tags(filter: filter)
+        previous_tag = filtered_tags[1]
+        changelog_symbolys_limit_length = values[:limit] ? values[:limit].to_i : ENV['FABRIC_CHANGELOG_LIMIT'].to_i
+
+        if last_tag == nil
+            UI.crash! "Could not find last tag"
+        end
+
+        if previous_tag == nil
+            UI.crash! "Could not find previous tag by filter #{filter}"
+        end
+
+        UI.success("Tag filter: #{filter}")
+        UI.success("Last tag: #{last_tag}")
+        UI.success("Previous tag: #{previous_tag}")
+
+        changelog = changelog_from_git_commits(between: [previous_tag, "HEAD"], merge_commit_filtering: "exclude_merges")
+
+        #For some reason we need to truncate changelog (ex. Crashlytics notes limit)
+        if changelog_symbolys_limit_length != nil and changelog_symbolys_limit_length != 0
+            #Because pure ruby does not have the truncate function, just make itself
+            #Inspired by https://stackoverflow.com/a/9503685
+            changelog = changelog[0..changelog_symbolys_limit_length].gsub(/\s\w+$/,'')
+
+            #Override changelog to give the possibility to access truncated changelog from another lane
+            lane_context[SharedValues::FL_CHANGELOG] = changelog
+            UI.success("Changelog truncated to length: #{changelog_symbolys_limit_length}")
+        end
+
+        #Return changelog result
+        changelog
+    end
+
+    desc "Get git tags filtered by some value (filter)"
+    lane :get_filtered_tags do |values|
+        tag_value_filter = values[:filter]
+        if tag_value_filter == nil
+            UI.crash! "Could not find filter for tags, pls define it. Sample: get_filtered_tags filter:'qa/' "
+        end
+
+        #https://github.com/fsaragoca/fastlane-plugin-git_tags
+        #Get all tags
+        tags = git_tags
+
+        #Filter tags
+        filtered_tags = tags.select {|v| v.start_with?("#{tag_value_filter}")}
+
+        UI.success("Filter: #{tag_value_filter}")
+        UI.success "Tags sorted by creation date:"
+        UI.message filtered_tags.join(' - ')
+
+        #return filtered tags
+        filtered_tags
+    end
+
+    lane :filtered_tags do
+        #Create changelog from tags
+        make_filtered_changelog(filter: "stage/")
+    end
+
+    desc "Bump bundle version"
+    lane :bump_bundle_version do |values|
+        new_bundle_version_i = nil
+        if values[:bundle_version] != nil
+            new_bundle_version_i = values[:bundle_version].to_i
+        end
+
+        #Define core folder for info plist path
+        core_folder = ENV["FOLDER_CORE_APP"]
+
+        #Check that we set core_folder correct
+        if core_folder == nil
+            UI.crash! "Empty VARIABLE FOLDER_CORE_APP. Pls define it."
+        end
+
+        #Prepare parameters
+        info_plist_path = "#{core_folder}/Resources/Info.plist"
+        xcodeproj = "App.xcodeproj"
+        bundle_version_key = "CFBundleVersion"
+
+        #Return string anyway
+        current_bundle_version = get_info_plist_value(
+            key: bundle_version_key,
+            path: info_plist_path
+        )
+
+        if new_bundle_version_i == nil
+            new_bundle_version_i = current_bundle_version.to_i + 1
+        end
+
+        set_info_plist_value(
+            key: bundle_version_key,
+            path: info_plist_path,
+            value: "#{new_bundle_version_i}"
+        )
+
+        UI.success "========================================================="
+        UI.success "Successfully changed value for key: #{bundle_version_key}"
+        UI.success "At path: #{info_plist_path}"
+        UI.success "Previous value: #{current_bundle_version}"
+        UI.success "New value: #{new_bundle_version_i}"
+        UI.success "========================================================="
+    end
+
+    desc "Lint code with parameters"
+    lane :lint do |values|
+        #Ternar operator not work for bool :(
+        skip_fail = values[:skip_fail]
+        if skip_fail == nil
+            skip_fail = ENV["SWIFTLINT_SKIP_FAIL"]
+        end
+  
+        swiftlint(
+            mode: :lint,
+            path: "./",
+            config_file: "./.swiftlint.yml",
+            strict: false,
+            ignore_exit_status: skip_fail,
+            executable: "./Pods/SwiftLint/swiftlint"
+        )
+    end
+
+    after_all do |lane|
+        # This block is called, only if the executed lane was successful
+    end
+
+    error do |lane, exception, values|
+        error_message = "#{exception.message}"    
+    end
+end
