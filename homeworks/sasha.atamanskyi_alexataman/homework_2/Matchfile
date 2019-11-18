@@ -1,0 +1,11 @@
+git_url "git@git.moc.com:test-project/match.git"
+
+type "development"
+
+app_identifier [
+    "com.moc.test-project",
+    "com.moc.test-project-extension"
+]
+
+username "username@moc.com"
+team_id "666666"
