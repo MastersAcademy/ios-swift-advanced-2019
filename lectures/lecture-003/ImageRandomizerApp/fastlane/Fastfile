@@ -1,0 +1,48 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+
+  before_all do
+    import "./Fastfile.Utils.Crypto"
+  end
+
+  lane :match_decrypt do
+    match_decrypt_repo
+  end
+
+  lane :match_encrypt do
+    match_encrypt_repo
+  end
+
+  desc "Get cert ID for manual encrypt for match"
+  lane :get_cert_id do
+      itunes_connect_email = ENV["DELIVER_USER"]
+      if itunes_connect_email == nil
+          UI.crash! "Could not find variable for DELIVER_USER. Pls define it in CI Variables or bash_profile"
+      end
+
+      fastlane_require 'spaceship'
+      Spaceship.login(itunes_connect_email)
+      Spaceship.select_team
+      Spaceship.certificate.all.each do |cert|
+        cert_type = Spaceship::Portal::Certificate::CERTIFICATE_TYPE_IDS[cert.type_display_id].to_s.split("::")[-1]
+        puts "Cert id: #{cert.id}, name: #{cert.name}, expires: #{cert.expires.strftime("%Y-%m-%d")}, type: #{cert_type}"
+      end
+  end
+
+end

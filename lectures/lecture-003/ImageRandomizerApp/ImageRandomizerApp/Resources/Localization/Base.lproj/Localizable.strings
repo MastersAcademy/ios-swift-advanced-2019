@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  ImageRandomizerApp
+
+  Created by Maksym Savisko on 4/2/19.
+  Copyright © 2019 Maksym Savisko. All rights reserved.
+*/
+
+"defaultOk" = "OK";
+"defaultError" = "Error";
+"imageDetailsNavigationTitle" = "Details";
+"imageDetailsUpperButtonTitle" = "SELECT";
+"imageDetailsBottomButtonTitle" = "RANDOM";
+"imageDetailsInfoAlertTitle" = "Created by Maksym Savisko";
+"imageDetailsInfoAlertSubtitle" = "The time now is %@";
+"imageListNavigationTitle" = "List";
