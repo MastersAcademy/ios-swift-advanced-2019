@@ -1,0 +1,58 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+
+    before_all do
+        import "./environment_vars"
+    end
+
+  desc "Setup certificates for development"
+  lane :certificates do
+    match(type: "development")
+    match(type: "adhoc")
+    match(type: "appstore")
+  end
+  
+  desc "Runs all the tests"
+  lane :test do
+    vendor_install
+    scan
+  end
+  
+  desc "Make adhoc build (Debug configuration)"
+  lane :build_test do
+    match(type: "adhoc", readonly: true)
+    vendor_install
+    increment_build_number
+    gym(scheme: "hw1", output_directory: "build", configuration: "Debug", export_method: "ad-hoc", archive_path: "build/hw1.xcarchive")
+  end
+  
+  desc "Push a new build to TestFlight (App-Store configuration)"
+  lane :beta_live do
+    match(type: "appstore", readonly: true)
+    vendor_install
+    increment_build_number
+    gym(scheme: "hw1", output_directory: "build", configuration: "App-Store", export_method: "app-store", archive_path: "build/hw1.xcarchive")
+    pilot(skip_submission: true, skip_waiting_for_build_processing: true)
+  end
+  
+end
+
+def vendor_install
+  cocoapods(repo_update: true)
+end
