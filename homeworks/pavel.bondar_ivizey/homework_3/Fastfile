@@ -2,7 +2,6 @@ default_platform(:ios)
 
 platform :ios do
   before_all do 
-    # ENV['FASTLANE_SESSION'] = session
     import "./Fastfile.Utils.Crypto"
   end
   desc "Description of what the lane does"
@@ -19,12 +18,32 @@ platform :ios do
   end
 
  lane :deploy_firebase do
-        firebase_app_distribution(
-              app: "1:591528737494:ios:5c6406deafdccd26a72777",
-              testers: "tester1@company.com",
-              ipa_path: "/Users/pavelbondar/Documents/SP/JSONMusic/JSONMusic.ipa",
-              release_notes: "Test upload ipa file"
-          )
+
+  match(
+    git_url: "git@gitlab.com:Ivizey/matchdata.git",
+    app_identifier: "com.masters-academy.JSONMusic",
+    readonly: true,
+    username: "maxim.savisko@gmail.com",
+    storage_mode: "git",
+    type: "development"
+  )
+
+  cocoapods(
+    use_bundle_exec: true,
+    try_repo_update_on_error: true
+  )
+
+  gym(
+    scheme: "JSONMusic",
+    export_method: "ad-hoc"
+  )
+
+  firebase_app_distribution(
+    app: "1:591528737494:ios:5c6406deafdccd26a72777",
+    testers: "test@gmail.com",
+    release_notes: "Test upload ipa file"
+  )
+
   end
 
   desc "Get cert ID for manual encrypt for match"
