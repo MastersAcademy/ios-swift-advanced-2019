@@ -1,0 +1,31 @@
+stages:
+  - prepare
+  - merge-request
+
+deps_install:
+  stage: prepare
+  script:
+  #  - bundle install
+   - bundle exec fastlane deploy_firebase
+  tags:
+   - ios
+  only:
+   - /^beta/.*$/
+  except:
+   - branches
+  cache:
+    key: $CI_PIPELINE_ID
+    paths:
+      - Pods/
+
+pull-request:
+  stage: merge-request
+  only:
+    refs:
+        - merge_requests
+    variables:
+        - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "feature"
+  script:
+    - bundle exec fastlane tests
+  tags:
+    - ios
