@@ -44,7 +44,7 @@ private func dataTask<T: Decodable>(_ path: String, completionHandler: (@escapin
       } else if let data = data {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.locale = Current.locale
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         
         let decoder = JSONDecoder()
@@ -74,12 +74,12 @@ struct Analytics {
         name: "tapped_repo",
         properties: [
           "repo_name": repo.name,
-          "build": Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "Unknown",
-          "release": Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Unknown",
-          "screen_height": String(describing: UIScreen.main.bounds.height),
-          "screen_width": String(describing: UIScreen.main.bounds.width),
-          "system_name": UIDevice.current.systemName,
-          "system_version": UIDevice.current.systemVersion,
+          "build": Current.bundle.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "Unknown",
+          "release": Current.bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "Unknown",
+          "screen_height": String(describing: Current.screen.bounds.height),
+          "screen_width": String(describing: Current.screen.bounds.width),
+          "system_name": Current.device.systemName,
+          "system_version": Current.device.systemVersion,
         ]
       )
     }
@@ -92,6 +92,10 @@ public struct Environment {
   var analytics = Analytics()
   var date: () -> Date = Date.init
   var gitHub = GitHub()
+  var bundle = Bundle.main
+  var screen = UIScreen.main
+  var device = UIDevice.current
+  var locale = Locale(identifier: "en_US_POSIX")
 }
 
 public var Current = Environment()
@@ -118,7 +122,8 @@ public extension Environment {
     static let mock = Environment(
     analytics: .mock,
     date: { Date(timeIntervalSinceReferenceDate: 557152051) },
-    gitHub: .mock
-  )
+    gitHub: .mock,
+    locale: Locale(identifier: "ar_SD")
+   )
     static let live = Environment()
 }

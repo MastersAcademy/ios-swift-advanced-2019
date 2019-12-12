@@ -19,7 +19,7 @@
 		04F16B2123A23CF200B1B79D /* MAReposFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F16B0C23A23CF200B1B79D /* MAReposFramework.framework */; };
 		04F16B2223A23CF200B1B79D /* MAReposFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 04F16B0C23A23CF200B1B79D /* MAReposFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04F16B2B23A23D5400B1B79D /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F16AD823A236DB00B1B79D /* ReposViewController.swift */; };
-		04F16B2C23A23D5A00B1B79D /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F16B0523A237F500B1B79D /* Models.swift */; };
+		04F16B2C23A23D5A00B1B79D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F16B0523A237F500B1B79D /* Environment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,7 +88,7 @@
 		04F16AF223A236DC00B1B79D /* MAReposUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MAReposUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F16AF623A236DC00B1B79D /* MAReposUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAReposUITests.swift; sourceTree = "<group>"; };
 		04F16AF823A236DC00B1B79D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04F16B0523A237F500B1B79D /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		04F16B0523A237F500B1B79D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		04F16B0C23A23CF200B1B79D /* MAReposFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MAReposFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F16B0E23A23CF200B1B79D /* MAReposFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAReposFramework.h; sourceTree = "<group>"; };
 		04F16B0F23A23CF200B1B79D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 				04F16AD423A236DB00B1B79D /* AppDelegate.swift */,
 				04F16AD623A236DB00B1B79D /* SceneDelegate.swift */,
 				04F16AD823A236DB00B1B79D /* ReposViewController.swift */,
-				04F16B0423A237D900B1B79D /* Models */,
+				04F16B0523A237F500B1B79D /* Environment.swift */,
 				04F16ADD23A236DC00B1B79D /* Assets.xcassets */,
 				04F16ADF23A236DC00B1B79D /* LaunchScreen.storyboard */,
 				04F16AE223A236DC00B1B79D /* Info.plist */,
@@ -194,14 +194,6 @@
 				04F16AF823A236DC00B1B79D /* Info.plist */,
 			);
 			path = MAReposUITests;
-			sourceTree = "<group>";
-		};
-		04F16B0423A237D900B1B79D /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				04F16B0523A237F500B1B79D /* Models.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		04F16B0D23A23CF200B1B79D /* MAReposFramework */ = {
@@ -451,7 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04F16B2B23A23D5400B1B79D /* ReposViewController.swift in Sources */,
-				04F16B2C23A23D5A00B1B79D /* Models.swift in Sources */,
+				04F16B2C23A23D5A00B1B79D /* Environment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
