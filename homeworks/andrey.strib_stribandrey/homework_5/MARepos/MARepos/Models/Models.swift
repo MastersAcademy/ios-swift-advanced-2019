@@ -9,7 +9,7 @@
 
 import UIKit
 
-enum Result<Value, Error> {
+public enum Result<Value, Error> {
   case success(Value)
   case failure(Error)
 }
@@ -18,8 +18,8 @@ enum Result<Value, Error> {
 //  func fetchRepos(onComplete completionHandler: (@escaping (Result<[GitHub.Repo], Error>) -> Void))
 //}
 
-struct GitHub { //: GitHubProtocol {
-  struct Repo: Decodable {
+public struct GitHub { //: GitHubProtocol {
+  public struct Repo: Decodable {
     var archived: Bool
     var description: String?
     var htmlUrl: URL
@@ -27,7 +27,7 @@ struct GitHub { //: GitHubProtocol {
     var pushedAt: Date?
   }
   
-  var fetchRepos = fetchRepos(onComplete:)
+  public var fetchRepos = fetchRepos(onComplete:)
 }
 
 
@@ -88,13 +88,13 @@ struct Analytics {
   var track = track(_:)
 }
 
-struct Environment {
+public struct Environment {
   var analytics = Analytics()
   var date: () -> Date = Date.init
   var gitHub = GitHub()
 }
 
-var Current = Environment()
+public var Current = Environment()
 
 extension GitHub {
   static let mock = GitHub(fetchRepos: { callback in
@@ -114,10 +114,11 @@ extension Analytics {
   })
 }
 
-extension Environment {
-  static let mock = Environment(
+public extension Environment {
+    static let mock = Environment(
     analytics: .mock,
     date: { Date(timeIntervalSinceReferenceDate: 557152051) },
     gitHub: .mock
   )
+    static let live = Environment()
 }

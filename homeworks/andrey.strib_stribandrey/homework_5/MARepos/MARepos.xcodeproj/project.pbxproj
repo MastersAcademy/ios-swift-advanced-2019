@@ -95,6 +95,7 @@
 		04F16B1423A23CF200B1B79D /* MAReposFrameworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MAReposFrameworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F16B1B23A23CF200B1B79D /* MAReposFrameworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAReposFrameworkTests.swift; sourceTree = "<group>"; };
 		04F16B1D23A23CF200B1B79D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04F16B2D23A23E8600B1B79D /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +166,7 @@
 		04F16AD323A236DB00B1B79D /* MARepos */ = {
 			isa = PBXGroup;
 			children = (
+				04F16B2D23A23E8600B1B79D /* Playground.playground */,
 				04F16AD423A236DB00B1B79D /* AppDelegate.swift */,
 				04F16AD623A236DB00B1B79D /* SceneDelegate.swift */,
 				04F16AD823A236DB00B1B79D /* ReposViewController.swift */,
