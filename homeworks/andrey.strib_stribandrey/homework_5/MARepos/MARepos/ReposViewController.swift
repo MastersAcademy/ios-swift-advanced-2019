@@ -11,14 +11,14 @@
 import UIKit
 import SafariServices
 
-class ViewController: UITableViewController {
+public class ReposViewController: UITableViewController {
   var repos: [GitHub.Repo] = [] {
     didSet {
       self.tableView.reloadData()
     }
   }
   
-  override func viewDidLoad() {
+    override public func viewDidLoad() {
     super.viewDidLoad()
     
     self.title = "Masters Academy Repos"
@@ -46,11 +46,11 @@ class ViewController: UITableViewController {
     }
   }
   
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return self.repos.count
   }
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let repo = self.repos[indexPath.row]
     
     let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
@@ -73,7 +73,7 @@ class ViewController: UITableViewController {
     return cell
   }
   
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let repo = self.repos[indexPath.row]
     Current.analytics.track(.tappedRepo(repo))
     let vc = SFSafariViewController(url: repo.htmlUrl)
