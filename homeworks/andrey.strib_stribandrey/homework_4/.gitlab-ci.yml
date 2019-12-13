@@ -1,0 +1,43 @@
+stages:
+  - prepare
+  - test
+  
+#Automatically run pod installation (from cache) for tags
+deps_install:
+  stage: prepare
+  script:
+   - bundle install
+   - export LC_ALL=en_US.UTF-8
+   - export LANG=en_US.UTF-8
+   - bundle exec fastlane pods #use_bundle_exec:true try_repo_update_on_error:true
+  tags:
+   - ios
+  only:
+   - /^beta/.*$/
+   - /^feature/.*$/
+  except:
+   - branches
+  cache:
+    key: $CI_PIPELINE_ID
+    paths:
+      - Pods/
+
+tests:
+  stage: test
+  script:
+    - export LC_ALL=en_US.UTF-8
+    - export LANG=en_US.UTF-8
+    - bundle exec fastlane test
+  tags:
+    - ios
+  only:
+    refs:
+      - merge_requests
+    variables:
+      - $CI_COMMIT_REF_NAME =~ /^feature.*/
+  except:
+    - tags
+  cache:
+    key: $CI_PIPELINE_ID
+    paths:
+      - Pods/
