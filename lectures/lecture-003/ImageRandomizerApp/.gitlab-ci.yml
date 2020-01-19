@@ -1,0 +1,18 @@
+stages:
+  - prepare
+
+deps_install:
+  stage: prepare
+  script:
+   - bundle install
+   - bundle exec fastlane cocoapods use_bundle_exec:true try_repo_update_on_error:true
+  tags:
+   - ios
+  only:
+   - /^beta/.*$/
+  except:
+    - branches
+  cache:
+    key: $CI_PIPELINE_ID
+    paths:
+      - Pods/

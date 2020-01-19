@@ -1,0 +1,20 @@
+PODS:
+  - KeychainAccess (4.1.0)
+  - Sourcery (0.17.0)
+
+DEPENDENCIES:
+  - KeychainAccess (= 4.1.0)
+  - Sourcery (= 0.17.0)
+
+SPEC REPOS:
+  trunk:
+    - KeychainAccess
+    - Sourcery
+
+SPEC CHECKSUMS:
+  KeychainAccess: 445e28864fe6d3458b41fa211bcdc39890e8bd5a
+  Sourcery: 3ed61be7c8a1218fce349266139379dba477efe0
+
+PODFILE CHECKSUM: ccbcd4f74d1f334b656804228d560976d8f8f4f4
+
+COCOAPODS: 1.8.4
