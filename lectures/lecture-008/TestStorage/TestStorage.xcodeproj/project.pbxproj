@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6280F0D50836B9D518BCE7B7 /* Pods_TestStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E669B48631ACF49003D8516C /* Pods_TestStorage.framework */; };
+		92379C7523D7650900D12944 /* FetchDefaultsStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92379C7423D7650900D12944 /* FetchDefaultsStorageTests.swift */; };
 		92BC6A2521F6410500933A8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BC6A2421F6410500933A8E /* AppDelegate.swift */; };
 		92BC6A2721F6410500933A8E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BC6A2621F6410500933A8E /* ViewController.swift */; };
 		92BC6A2A21F6410500933A8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92BC6A2821F6410500933A8E /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		0BE95526E980991AEE26F683 /* Pods-TestStorage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestStorage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestStorage/Pods-TestStorage.debug.xcconfig"; sourceTree = "<group>"; };
+		92379C7423D7650900D12944 /* FetchDefaultsStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDefaultsStorageTests.swift; sourceTree = "<group>"; };
 		92541A5C685E7E933A76B26F /* Pods-TestStorage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestStorage.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestStorage/Pods-TestStorage.release.xcconfig"; sourceTree = "<group>"; };
 		92BC6A2121F6410500933A8E /* TestStorage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestStorage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92BC6A2421F6410500933A8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			children = (
 				92E31BD321F8D3EB00E9F239 /* Info.plist */,
 				92E31BD921F8D46200E9F239 /* DefaultsStorageTests.swift */,
+				92379C7423D7650900D12944 /* FetchDefaultsStorageTests.swift */,
 			);
 			path = TestStorageUnitTests;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92379C7523D7650900D12944 /* FetchDefaultsStorageTests.swift in Sources */,
 				92E31BDA21F8D46200E9F239 /* DefaultsStorageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
