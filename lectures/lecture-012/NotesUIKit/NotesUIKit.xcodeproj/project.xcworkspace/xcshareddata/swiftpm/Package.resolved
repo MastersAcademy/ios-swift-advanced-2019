@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftyRedux",
+        "repositoryURL": "https://github.com/igorkravchenko/swifty-redux",
+        "state": {
+          "branch": null,
+          "revision": "c79ee3ac9d706e4862de58da146b92a5484f1107",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
