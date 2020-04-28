@@ -8,6 +8,8 @@ extension Store {
                                middleware: [navigationMiddleware,
                                             launchMiddleware,
                                             noteListMiddleware,
+                                            connectAccountMiddleware,
+                                            createAccountMiddleware,
                                             loggingMiddleware])
     }
 }

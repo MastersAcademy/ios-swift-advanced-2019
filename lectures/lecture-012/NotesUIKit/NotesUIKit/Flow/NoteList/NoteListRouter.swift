@@ -10,4 +10,14 @@ public extension NoteListRouter {
                   presenterProvider: NoteDetailsPresenter.init)
         currentController?.navigationController?.pushViewController(controller, animated: true)
     }
+    
+    func showConnectAccount() {
+        let controller = ConnectAccountViewController()
+        configure(controller: controller,
+                  dispatcher: dispatcher,
+                  observable: observable,
+                  routerProvider: ConnectAccountRouter.init,
+                  presenterProvider: ConnectAccountPresenter.init)
+        currentController?.navigationController?.pushViewController(controller, animated: true)
+    }
 }

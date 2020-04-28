@@ -6,6 +6,15 @@ public struct NavigationState: Substate {
         case nop
         case noteList
         case noteDetails
+        case connectUserAccount
+        case createUserAccount
+        case connectAccountInvalidEmailAlert
+        case connectAccountInvalidPasswordAlert
+        case connectAccountGoBackToNoteList
+        case createAccountInvalidEmailAlert
+        case createAccountInvalidPasswordAlert
+        case createAccountPasswordsDontMatchAlert
+        case createAccountGoBackToNoteList
     }
     
     public static let initial = NavigationState(screen: .nop)

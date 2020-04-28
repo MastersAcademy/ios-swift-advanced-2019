@@ -23,13 +23,15 @@ public final class NoteListPresenter: Presentable {
     public func stateToProps(_ state: AppState) -> NoteListViewController.Props {
         if state.navigation.screen == .noteDetails {
             router.showNoteDetails()
+        } else if state.navigation.screen == .connectUserAccount {
+            router.showConnectAccount()
         }
         
         let handleAddTap = Command<Void> { [dispatcher] in
             dispatcher.dispatch(NoteListEffect.createNote)
         }
         
-        let noteToProps: (NoteListState.Note) -> Props.Note = {  [dispatcher, dateFormatter] note in
+        let noteToProps: (NoteListState.Note) -> Props.Note = { [dispatcher, dateFormatter] note in
             let handleTap = Command<Void> {
                 dispatcher.dispatch(NoteListEffect.editNote(note.id))
             }
@@ -38,19 +40,21 @@ public final class NoteListPresenter: Presentable {
                 dispatcher.dispatch(NoteListEffect.removeNote(note.id))
             }
             
-            
             let item = Props.Note(title: note.content.isEmpty ? "Note" : note.content, tap: handleTap,
                                   date: dateFormatter.string(from: note.updatedAt), deleteTap: handleDeleteTap)
             return item
+        }
+        
+        let handleConnectUserTap = Command<Void> { [dispatcher] in
+            dispatcher.dispatch(NavigationAction.navigate(.connectUserAccount))
         }
         
         let notes = state.noteList.list
             .compactMap { noteId in state.noteList.notes[noteId] }
             .map(noteToProps)
         
-        return NoteListViewController.Props(title: "Notes",
-                                            notes: notes,
-                                            addTap: handleAddTap)
+        return NoteListViewController.Props(title: "Notes", notes: notes,
+                                            addTap: handleAddTap, connectUserTap: handleConnectUserTap)
     }
 }
 

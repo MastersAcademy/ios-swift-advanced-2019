@@ -17,6 +17,8 @@ public enum NoteListEffect: Action {
 }
 
 public extension NoteListEffect {
+    static let firestoreNotes = FirestoreNotesService()
+    
     func handle(getState: GetState<AppState>, dispatch: Dispatch) {
         switch self {
         case .createNote:
@@ -29,8 +31,15 @@ public extension NoteListEffect {
                 dispatch(NoteDetailsAction.setNote(note.id))
                 dispatch(NoteListAction.addNote(note))
                 dispatch(NavigationAction.navigate(.noteDetails))
-            case let .failure(error): echoError(error)
                 
+                guard let user = Current.firebase.auth.user() else { return }
+                Current.firestoreNotes.createNote(userId: user.uid,
+                                                  id: note.id,
+                                                  content: note.content,
+                                                  updatedAt: note.updatedAt) { result in
+                                                    echo(result)
+                }
+            case let .failure(error): echoError(error)
             }
             
         case let .editNote(noteID):
@@ -41,17 +50,25 @@ public extension NoteListEffect {
             switch Current.noteStorage.update(noteID, content, date) {
             case .success:
                 dispatch(NoteListAction.updateNote(id: noteID,
-                content: content,
-                date: date))
+                                                   content: content,
+                                                   date: date))
+                guard let user = Current.firebase.auth.user() else { return }
+                Current.firestoreNotes.updateNote(userId: user.uid,
+                                                  id: noteID,
+                                                  content: content,
+                                                  updatedAt: date) { echo($0) }
             case let .failure(error):
                 echoError(error)
-                
             }
                 
         case let .removeNote(noteID):
             switch Current.noteStorage.delete(noteID) {
             case .success:
                 dispatch(NoteListAction.removeNote(noteID))
+                 guard let user = Current.firebase.auth.user() else { return }
+                Current.firestoreNotes.removeNote(userId: user.uid,
+                                                  id: noteID) { result in
+            }
             case let .failure(error): echoError(error)
             }   
         }

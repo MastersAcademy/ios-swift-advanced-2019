@@ -70,14 +70,3 @@ public struct NotesStorage {
         }
     }
 }
-
-func zip2<A, B>(_ a: A?, _ b: B?) -> (A, B)? {
-    guard let a = a, let b = b else { return nil }
-    return (a, b)
-}
-
-func zip3<A, B, C>(_ a: A?, _ b: B?, _ c: C?) -> (A, B, C)? {
-    return zip2(a, zip2(b, c))
-        .map { a, bc in (a, bc.0, bc.1) }
-}
-

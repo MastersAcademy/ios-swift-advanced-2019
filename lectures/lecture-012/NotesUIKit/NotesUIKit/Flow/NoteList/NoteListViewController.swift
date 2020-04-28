@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  NotesUIKit
-//
-//  Created by Igor Kravchenko on 17.04.2020.
-//  Copyright © 2020 Igor Kravchenko. All rights reserved.
-//
-
 import UIKit
 import SwiftyReduxCommand
 
@@ -25,6 +17,7 @@ public class NoteListViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupAddButton()
+        setupConnectUserButton()
     }
     
     private func setupTableView() {
@@ -45,6 +38,15 @@ public class NoteListViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                                    target: self,
                                                                    action: #selector(handleAddTap))
+       
+    }
+    
+    private func setupConnectUserButton() {
+        navigationItem.leftBarButtonItem =
+                   UIBarButtonItem(image: UIImage(systemName: "person.badge.plus.fill"),
+                                   style: .plain,
+                                   target: self,
+                                   action: #selector(handleConnectUserTap))
     }
     
     private func render(props: Props) {
@@ -62,6 +64,11 @@ public class NoteListViewController: UIViewController {
     private func handleAddTap() {
         props.addTap.execute()
     }
+    
+    @objc
+    private func handleConnectUserTap() {
+        props.connectUserTap.execute()
+    }
 
 }
 
@@ -70,11 +77,15 @@ extension NoteListViewController: PropsAssignable {
         public let title: String
         public let notes: [Note]
         public let addTap: Command<Void>
+        public let connectUserTap: Command<Void>
         
-        public init(title: String = "", notes: [Note] = [], addTap: Command<Void> = .nop()) {
+        public init(title: String = "", notes: [Note] = [],
+                    addTap: Command<Void> = .nop(),
+                    connectUserTap: Command<Void> = .nop()) {
             self.title = title
             self.notes = notes
             self.addTap = addTap
+            self.connectUserTap = connectUserTap
         }
         
         public struct Note {

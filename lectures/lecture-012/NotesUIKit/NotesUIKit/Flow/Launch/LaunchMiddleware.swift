@@ -17,6 +17,18 @@ public extension LaunchEffect {
         switch self {
         case .setup:
             
+            Current.exceptionHandler.setEnabled(true)
+            // Firebase needs to be configured on main thread
+            Current.const.queue.main.sync (execute: Current.firebase.configure)
+            Current.firebase.firestore.setLoggingEnabled(true)
+            Current.firebase.firestore.setPersistenceEnabled(true)
+            
+            if let user = Current.firebase.auth.user() {
+                dispatch(AccountAction.setUser(AccountState.User(uid: user.uid, email: user.email)))
+            }
+            
+    
+            
             let result = Current.noteStorage.read(nil)
             
             switch result {
