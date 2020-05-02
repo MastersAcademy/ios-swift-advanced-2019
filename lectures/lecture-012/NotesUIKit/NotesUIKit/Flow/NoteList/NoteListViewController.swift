@@ -1,5 +1,6 @@
 import UIKit
 import SwiftyReduxCommand
+import CasePaths
 
 public class NoteListViewController: UIViewController {
     
@@ -17,7 +18,6 @@ public class NoteListViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupAddButton()
-        setupConnectUserButton()
     }
     
     private func setupTableView() {
@@ -41,14 +41,6 @@ public class NoteListViewController: UIViewController {
        
     }
     
-    private func setupConnectUserButton() {
-        navigationItem.leftBarButtonItem =
-                   UIBarButtonItem(image: UIImage(systemName: "person.badge.plus.fill"),
-                                   style: .plain,
-                                   target: self,
-                                   action: #selector(handleConnectUserTap))
-    }
-    
     private func render(props: Props) {
         title = props.title
         if navigationController?.visibleViewController == self &&
@@ -56,6 +48,34 @@ public class NoteListViewController: UIViewController {
             tableView.reloadSections([section], with: .fade)
         } else {
             tableView.reloadData()
+        }
+        renderedAccount = props.account
+    }
+    
+    private func renderConnectUserButton() {
+        navigationItem.leftBarButtonItem =
+                   UIBarButtonItem(image: UIImage(systemName: "link.icloud.fill"),
+                                   style: .plain,
+                                   target: self,
+                                   action: #selector(handleConnectUserTap))
+    }
+    
+    private func renderDisconnectUserButton() {
+        navigationItem.leftBarButtonItem =
+                   UIBarButtonItem(image: UIImage(systemName: "icloud.fill"),
+                                   style: .plain,
+                                   target: self,
+                                   action: #selector(handleDisconnectUserTap))
+    }
+    
+    private var renderedAccount: Props.Account? = nil {
+        didSet {
+            switch (renderedAccount, oldValue) {
+            case (.none, .none), (.none, .some): navigationItem.leftBarButtonItem = nil
+            case (.connect, .disconnect), (.connect, .none): renderConnectUserButton()
+            case (.disconnect, .connect), (.disconnect, .none): renderDisconnectUserButton()
+            case (.connect, .connect), (.disconnect, .disconnect): break
+            }
         }
     }
     
@@ -67,7 +87,12 @@ public class NoteListViewController: UIViewController {
     
     @objc
     private func handleConnectUserTap() {
-        props.connectUserTap.execute()
+        extract(case: Props.Account.connect, from: props.account)?.execute()
+    }
+    
+    @objc
+    private func handleDisconnectUserTap() {
+        extract(case: Props.Account.disconnect, from: props.account)?.execute()
     }
 
 }
@@ -77,15 +102,15 @@ extension NoteListViewController: PropsAssignable {
         public let title: String
         public let notes: [Note]
         public let addTap: Command<Void>
-        public let connectUserTap: Command<Void>
+        public let account: Account
         
         public init(title: String = "", notes: [Note] = [],
                     addTap: Command<Void> = .nop(),
-                    connectUserTap: Command<Void> = .nop()) {
+                    account: Account = .connect(.nop())) {
             self.title = title
             self.notes = notes
             self.addTap = addTap
-            self.connectUserTap = connectUserTap
+            self.account = account
         }
         
         public struct Note {
@@ -101,6 +126,11 @@ extension NoteListViewController: PropsAssignable {
                 self.date = date
                 self.deleteTap = deleteTap
             }
+        }
+        
+        public enum Account {
+            case connect(Command<Void>)
+            case disconnect(Command<Void>)
         }
     }
     
@@ -161,6 +191,7 @@ public protocol IdentifierProvider {}
 extension IdentifierProvider {
     public static var identifier: String { return "\(Self.self)" }
 }
+
 
 
 

@@ -21,7 +21,7 @@ public struct NotesStorage {
         return stack.saveContext().flatMapError { .failure(NotesStorageError.stack($0)) }
     }
     
-    public func read(in range: Range<Int>? = nil) -> Result<[(id: UUID, content: String, updatedAt: Date)], Error> {
+    public func read(in range: Range<Int>? = nil) -> Result<[Note], Error> {
         let fetch: NSFetchRequest<StoredNote> = StoredNote.fetchRequest()
         fetch.sortDescriptors = [NSSortDescriptor(keyPath:\StoredNote.updatedAt, ascending: true)]
         do {
@@ -29,11 +29,11 @@ public struct NotesStorage {
             
             if let range = range {
                 return .success(results[range].compactMap {
-                    zip3($0.id, $0.content, $0.updatedAt)
+                    zip3(with: Note.init)($0.id, $0.content, $0.updatedAt)
                 })
             } else {
                 return .success(results.compactMap {
-                    zip3($0.id, $0.content, $0.updatedAt)
+                    zip3(with: Note.init)($0.id, $0.content, $0.updatedAt)
                 })
             }
         } catch {
@@ -68,5 +68,13 @@ public struct NotesStorage {
         } catch {
             return .failure(NotesStorageError.stack(error))
         }
+    }
+}
+
+public extension NotesStorage {
+    struct Note: Hashable {
+        public let id: UUID
+        public let content: String
+        public let updatedAt: Date
     }
 }

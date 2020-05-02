@@ -46,6 +46,7 @@
 		9AB51F88245813970041728D /* KeychainAccessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB51F87245813970041728D /* KeychainAccessService.swift */; };
 		9AB51F8A245817B00041728D /* SecureStorageSevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB51F89245817B00041728D /* SecureStorageSevice.swift */; };
 		9AB51F8C24581BDB0041728D /* Throwing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB51F8B24581BDB0041728D /* Throwing.swift */; };
+		9AB51F8E2458D9C40041728D /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB51F8D2458D9C40041728D /* Result.swift */; };
 		9AD2A98024562BB20032254A /* AccountState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD2A97F24562BB20032254A /* AccountState.swift */; };
 		9ADE63772449C86B0067EC28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADE63762449C86B0067EC28 /* AppDelegate.swift */; };
 		9ADE63792449C86B0067EC28 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADE63782449C86B0067EC28 /* SceneDelegate.swift */; };
@@ -73,6 +74,7 @@
 		9ADE63B8244A12440067EC28 /* LaunchMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADE63B5244A12440067EC28 /* LaunchMiddleware.swift */; };
 		9ADE63B9244A12440067EC28 /* LaunchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADE63B6244A12440067EC28 /* LaunchState.swift */; };
 		9ADE63BC244A348A0067EC28 /* NavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADE63BB244A348A0067EC28 /* NavigationState.swift */; };
+		9AE2C08A245CA02A00671945 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 9AE2C089245CA02A00671945 /* CasePaths */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +116,7 @@
 		9AB51F87245813970041728D /* KeychainAccessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccessService.swift; sourceTree = "<group>"; };
 		9AB51F89245817B00041728D /* SecureStorageSevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorageSevice.swift; sourceTree = "<group>"; };
 		9AB51F8B24581BDB0041728D /* Throwing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throwing.swift; sourceTree = "<group>"; };
+		9AB51F8D2458D9C40041728D /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		9AD2A97F24562BB20032254A /* AccountState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountState.swift; sourceTree = "<group>"; };
 		9ADE63732449C86A0067EC28 /* NotesUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotesUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ADE63762449C86B0067EC28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +157,7 @@
 				9ADE638C2449CA240067EC28 /* Core in Frameworks */,
 				9A5DB118DAE14107FD2DD101 /* Pods_NotesUIKit.framework in Frameworks */,
 				9AB51F86245813040041728D /* KeychainAccess in Frameworks */,
+				9AE2C08A245CA02A00671945 /* CasePaths in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +231,7 @@
 				9AB17A242450E14700F07577 /* Zip.swift */,
 				9A9ED8D5244BACCE008DF35E /* UIScrollView.swift */,
 				9AB51F8B24581BDB0041728D /* Throwing.swift */,
+				9AB51F8D2458D9C40041728D /* Result.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -407,6 +412,7 @@
 				9ADE638D2449CA240067EC28 /* Command */,
 				9ADE638F2449CA240067EC28 /* SideEffects */,
 				9AB51F85245813040041728D /* KeychainAccess */,
+				9AE2C089245CA02A00671945 /* CasePaths */,
 			);
 			productName = NotesUIKit;
 			productReference = 9ADE63732449C86A0067EC28 /* NotesUIKit.app */;
@@ -439,6 +445,7 @@
 			packageReferences = (
 				9ADE638A2449CA240067EC28 /* XCRemoteSwiftPackageReference "swifty-redux" */,
 				9AB51F84245813040041728D /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				9AE2C088245CA02A00671945 /* XCRemoteSwiftPackageReference "swift-case-paths" */,
 			);
 			productRefGroup = 9ADE63742449C86A0067EC28 /* Products */;
 			projectDirPath = "";
@@ -565,6 +572,7 @@
 				9ADE63A52449FF380067EC28 /* Deallocator.swift in Sources */,
 				9A9ED8CF244B06A5008DF35E /* NoteDetailsRouter.swift in Sources */,
 				9ADE63BC244A348A0067EC28 /* NavigationState.swift in Sources */,
+				9AB51F8E2458D9C40041728D /* Result.swift in Sources */,
 				9AB51F8A245817B00041728D /* SecureStorageSevice.swift in Sources */,
 				9ADE639F2449FF380067EC28 /* Dispatcher.swift in Sources */,
 			);
@@ -774,6 +782,14 @@
 				revision = c79ee3ac9d706e4862de58da146b92a5484f1107;
 			};
 		};
+		9AE2C088245CA02A00671945 /* XCRemoteSwiftPackageReference "swift-case-paths" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-case-paths";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -796,6 +812,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9ADE638A2449CA240067EC28 /* XCRemoteSwiftPackageReference "swifty-redux" */;
 			productName = SideEffects;
+		};
+		9AE2C089245CA02A00671945 /* CasePaths */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9AE2C088245CA02A00671945 /* XCRemoteSwiftPackageReference "swift-case-paths" */;
+			productName = CasePaths;
 		};
 /* End XCSwiftPackageProductDependency section */
 

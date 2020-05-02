@@ -45,16 +45,23 @@ public final class NoteListPresenter: Presentable {
             return item
         }
         
-        let handleConnectUserTap = Command<Void> { [dispatcher] in
-            dispatcher.dispatch(NavigationAction.navigate(.connectUserAccount))
-        }
-        
         let notes = state.noteList.list
             .compactMap { noteId in state.noteList.notes[noteId] }
             .map(noteToProps)
         
+        let account: Props.Account
+        
+        switch state.account.user {
+        case .some: account = .disconnect(Command { [dispatcher] in
+            dispatcher.dispatch(NavigationAction.navigate(.disconnectUserAccount))
+        })
+        case .none: account = .connect(Command { [dispatcher] in
+            dispatcher.dispatch(NavigationAction.navigate(.connectUserAccount))
+        })
+        }
+        
         return NoteListViewController.Props(title: "Notes", notes: notes,
-                                            addTap: handleAddTap, connectUserTap: handleConnectUserTap)
+                                            addTap: handleAddTap, account: account)
     }
 }
 

@@ -20,8 +20,10 @@ public class NoteDetailsPresenter: Presentable {
         }
         
         let handleNavigatedBack = Command<Void> { [dispatcher] in
-            if let note = state.editedNote, note.content.isEmpty {
-                dispatcher.dispatch(NoteListEffect.removeNote(note.id))
+            if let note = state.editedNote {
+                dispatcher.dispatch(note.content.isEmpty
+                    ? NoteListEffect.removeNote(note.id)
+                    : NoteListEffect.noticeNoteDoneEditing(note.id))
             }
         }
         

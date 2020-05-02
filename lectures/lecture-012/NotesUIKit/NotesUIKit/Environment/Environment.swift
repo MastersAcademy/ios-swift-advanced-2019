@@ -35,7 +35,7 @@ public extension Environment {
         public var notesFolderURL = Foundation.FileManager.default.urls(for: .documentDirectory,
                                                                         in: .userDomainMask)[0]
             .appendingPathComponent("notes", isDirectory: true)
-        public var logging = (actions: false, errors: true)
+        public var logging = (actions: true, errors: true)
         public var queue = (main: DispatchQueue.main, global: DispatchQueue.global(qos: .default))
         public var validation = (minPasswordLength: 8, maxPasswordLength: Int.max)
     }

@@ -14,6 +14,7 @@ public enum NoteListEffect: Action {
     case editNote(NoteListState.Note.ID)
     case updateNote(id: NoteListState.Note.ID, content: String)
     case removeNote(NoteListState.Note.ID)
+    case noticeNoteDoneEditing(NoteListState.Note.ID)
 }
 
 public extension NoteListEffect {
@@ -32,13 +33,11 @@ public extension NoteListEffect {
                 dispatch(NoteListAction.addNote(note))
                 dispatch(NavigationAction.navigate(.noteDetails))
                 
-                guard let user = Current.firebase.auth.user() else { return }
-                Current.firestoreNotes.createNote(userId: user.uid,
-                                                  id: note.id,
-                                                  content: note.content,
-                                                  updatedAt: note.updatedAt) { result in
-                                                    echo(result)
-                }
+//                guard let user = Current.firebase.auth.user() else { return }
+//                Current.firestoreNotes.createNote(userId: user.uid,
+//                                                  note: note.toFirestore()) { result in
+//                                                    echo(result)
+//                }
             case let .failure(error): echoError(error)
             }
             
@@ -52,11 +51,12 @@ public extension NoteListEffect {
                 dispatch(NoteListAction.updateNote(id: noteID,
                                                    content: content,
                                                    date: date))
-                guard let user = Current.firebase.auth.user() else { return }
-                Current.firestoreNotes.updateNote(userId: user.uid,
-                                                  id: noteID,
-                                                  content: content,
-                                                  updatedAt: date) { echo($0) }
+//                guard let user = Current.firebase.auth.user() else { return }
+//                Current.firestoreNotes.updateNote(userId: user.uid,
+//                                                  note: FirestoreNotesService.Note(id: noteID.uuidString,
+//                                                                                   content: content,
+//                                                                                   updatedAt: date
+//                                                                                    .timeIntervalSince1970)) { echo($0) }
             case let .failure(error):
                 echoError(error)
             }
@@ -65,12 +65,27 @@ public extension NoteListEffect {
             switch Current.noteStorage.delete(noteID) {
             case .success:
                 dispatch(NoteListAction.removeNote(noteID))
-                 guard let user = Current.firebase.auth.user() else { return }
+                guard let user = Current.firebase.auth.user() else { return }
                 Current.firestoreNotes.removeNote(userId: user.uid,
-                                                  id: noteID) { result in
+                                                  id: noteID.uuidString) { result in
             }
             case let .failure(error): echoError(error)
-            }   
+            }
+        case let .noticeNoteDoneEditing(noteID):
+            guard let state = getState() else { return }
+            guard let userId = state.account.user?.uid else { return }
+            guard let note = state.noteList.notes[noteID] else { return }
+            Current.firestoreNotes.createNote(userId: userId,
+                                              note: note.toFirestore()) { result in  echo(result) }
+
         }
+    }
+}
+
+public extension NoteListState.Note {
+    func toFirestore() -> FirestoreNotesService.Note {
+        return FirestoreNotesService.Note(id: id.uuidString,
+                                          content: content,
+                                          updatedAt: updatedAt.timeIntervalSince1970)
     }
 }

@@ -20,17 +20,11 @@ public extension CreateAccountEffect {
                 switch result {
                 case let .success(user):
                     user.getIDToken {
-                        let storageResult = $0.flatMap(
-                            Current
-                                .secureStorage
-                                .storeFirebaseAuthToken
-                        )
-                        
+                        let storageResult = $0.flatMap(Current.secureStorage.storeFirebaseAuthToken)
                         if case let .failure(error) =
                             storageResult {
                             echoError(error)
                         }
-                        
                         dispatch(NavigationAction
                             .navigate(.createAccountGoBackToNoteList))
                     }

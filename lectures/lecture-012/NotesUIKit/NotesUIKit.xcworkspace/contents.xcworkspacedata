@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:NotesUIKit/Resources/Generated/StoredNote+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
       location = "group:NotesUIKit.xcodeproj">
    </FileRef>
    <FileRef

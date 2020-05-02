@@ -7,6 +7,7 @@ public struct NavigationState: Substate {
         case noteList
         case noteDetails
         case connectUserAccount
+        case disconnectUserAccount
         case createUserAccount
         case connectAccountInvalidEmailAlert
         case connectAccountInvalidPasswordAlert
