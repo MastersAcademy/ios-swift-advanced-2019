@@ -1,6 +1,7 @@
 import Foundation
 
 public struct FirestoreNotesService {
+    public let listenerStorage = ListenerRemovalStorage()
     public func createNote(userId: String, note: Note,
                            completion: @escaping (Result<Void, ServiceError>) -> Void) {
         let doc = Current.firebase.firestore.document(noteDocumentPath(userId: userId, noteId: note.id))
@@ -44,7 +45,54 @@ public struct FirestoreNotesService {
             completion(result)
         }
     }
+    
+    public typealias NoteChange = FirestoreService.ServiceDocumentChange.ServiceDocumentChangeType
+    
+    public func addNotesChangedHandler(userId: String,
+                                       handler: @escaping (Result<(notes: [(note: Note, change: NoteChange)], cache: Bool), Error>) -> Void) {
+        
+        func docChangeToNote(_ docChange: FirestoreService.ServiceDocumentChange)
+            -> (note: Note, change: NoteChange)? {
+            let note = docChange.document().data().flatMap(Note.init)
+            return note.map { ($0, docChange.type()) }
+        }
+        
+        let listener = Current.firebase.firestore.collection(notesCollectionPath(userId: userId))
+            .addSnapshotListener { optSnapshot, optError in
+                let result = handleResult(result: optSnapshot, error: optError)
+                    .flatMap { snapshot in .success((notes: snapshot.documentChanges().compactMap(docChangeToNote),
+                                                     cache: snapshot.metadata().isFromCache()))  }
+                handler(result)
+        }.remove
+        listenerStorage.addListener(listener, forKey: .notesChangedHandler)
+    }
+    
+    public func removeNotesChangedHandler() {
+        listenerStorage.listener(forKey: .notesChangedHandler)?()
+        listenerStorage.removeListener(forKey: .notesChangedHandler)
+    }
+    
+    public func clearStoredNotes(completion: @escaping ( Result<(), Error>) -> Void) {
+        Current.firebase.firestore.clearPersistence { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+    
+    public func terminate(completion: @escaping ( Result<(), Error>) -> Void) {
+        Current.firebase.firestore.terminate { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
 }
+
 
 public extension FirestoreNotesService {
     enum ServiceError: Error {
@@ -70,7 +118,7 @@ public extension FirestoreNotesService {
         public let updatedAt: Double
     }
     
-    
+    typealias ChangeType = FirestoreService.ServiceDocumentChange
 }
 
 public extension FirestoreNotesService.Note {
@@ -89,5 +137,35 @@ public extension FirestoreNotesService.Note {
         ]
     }
     
-    
+    func document(userId: String) -> FirestoreService.ServiceDocumentReference {
+        Current.firebase.firestore.document(
+            Current.firestoreNotes.noteDocumentPath(userId: userId, noteId: self.id)
+        )
+    }
+}
+
+public extension FirestoreNotesService {
+    class ListenerRemovalStorage {
+        public enum Key: String, Hashable {
+            case notesChangedHandler
+        }
+        
+        public typealias ListenerRemoval = () -> Void
+        
+        private var listeners = [Key: ListenerRemoval]()
+        
+        public func addListener(_ listener: @escaping ListenerRemoval, forKey key: Key) {
+            assert(listeners[key] == nil)
+            listeners[key] = listener
+        }
+        
+        public func removeListener(forKey key: Key) {
+            listeners[key] = nil
+        }
+        
+        public func listener(forKey key: Key) -> ListenerRemoval? {
+            return listeners[key]
+        }
+        
+    }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A2443FC247D466100174D4A /* StoredNote+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2443FB247D466100174D4A /* StoredNote+CoreDataProperties.swift */; };
 		9A2DA1AE24537A50003E1177 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2DA1AD24537A50003E1177 /* Validation.swift */; };
 		9A2DA1B024538BA2003E1177 /* ConnectAccountMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2DA1AF24538BA2003E1177 /* ConnectAccountMiddleware.swift */; };
 		9A2DA1B22453993E003E1177 /* CreateAccountMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2DA1B12453993E003E1177 /* CreateAccountMiddleware.swift */; };
@@ -28,7 +29,6 @@
 		9A9ED8CD244B0676008DF35E /* NoteDetailsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8CC244B0676008DF35E /* NoteDetailsState.swift */; };
 		9A9ED8CF244B06A5008DF35E /* NoteDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8CE244B06A5008DF35E /* NoteDetailsRouter.swift */; };
 		9A9ED8D1244B06FE008DF35E /* NoteDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8D0244B06FE008DF35E /* NoteDetailsPresenter.swift */; };
-		9A9ED8D3244B1F4F008DF35E /* NoteDetailsMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8D2244B1F4F008DF35E /* NoteDetailsMiddleware.swift */; };
 		9A9ED8D6244BACCE008DF35E /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8D5244BACCE008DF35E /* UIScrollView.swift */; };
 		9A9ED8DA244CF709008DF35E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8D8244CF709008DF35E /* DataModel.xcdatamodeld */; };
 		9A9ED8DE244CF8F4008DF35E /* StoredNote+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8DC244CF8F4008DF35E /* StoredNote+CoreDataClass.swift */; };
@@ -79,6 +79,7 @@
 
 /* Begin PBXFileReference section */
 		84F4B7DF8A8DD3F9C380423B /* Pods_NotesUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotesUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A2443FB247D466100174D4A /* StoredNote+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StoredNote+CoreDataProperties.swift"; path = "/Users/igorkravchenko/Documents/Projects/MA/ios-swift-advanced-2019/lectures/lecture-012/NotesUIKit/NotesUIKit/Resources/Generated/StoredNote+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		9A2DA1AD24537A50003E1177 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		9A2DA1AF24538BA2003E1177 /* ConnectAccountMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountMiddleware.swift; sourceTree = "<group>"; };
 		9A2DA1B12453993E003E1177 /* CreateAccountMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountMiddleware.swift; sourceTree = "<group>"; };
@@ -99,7 +100,6 @@
 		9A9ED8CC244B0676008DF35E /* NoteDetailsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsState.swift; sourceTree = "<group>"; };
 		9A9ED8CE244B06A5008DF35E /* NoteDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsRouter.swift; sourceTree = "<group>"; };
 		9A9ED8D0244B06FE008DF35E /* NoteDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsPresenter.swift; sourceTree = "<group>"; };
-		9A9ED8D2244B1F4F008DF35E /* NoteDetailsMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsMiddleware.swift; sourceTree = "<group>"; };
 		9A9ED8D5244BACCE008DF35E /* UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		9A9ED8D9244CF709008DF35E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		9A9ED8DC244CF8F4008DF35E /* StoredNote+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredNote+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -220,7 +220,6 @@
 				9A9ED8CC244B0676008DF35E /* NoteDetailsState.swift */,
 				9A9ED8CE244B06A5008DF35E /* NoteDetailsRouter.swift */,
 				9A9ED8D0244B06FE008DF35E /* NoteDetailsPresenter.swift */,
-				9A9ED8D2244B1F4F008DF35E /* NoteDetailsMiddleware.swift */,
 			);
 			path = NoteDetails;
 			sourceTree = "<group>";
@@ -249,6 +248,7 @@
 		9A9ED8DB244CF8BD008DF35E /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				9A2443FB247D466100174D4A /* StoredNote+CoreDataProperties.swift */,
 				9A9ED8DC244CF8F4008DF35E /* StoredNote+CoreDataClass.swift */,
 				9A9ED8DD244CF8F4008DF35E /* StoredNote+CoreDataProperties.swift */,
 			);
@@ -326,11 +326,11 @@
 		9ADE63752449C86A0067EC28 /* NotesUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				9A9ED8C4244AFABC008DF35E /* Environment */,
 				9AB17A19244F631200F07577 /* Flow */,
 				9A9ED8E0244E4167008DF35E /* Services */,
 				9A9ED8D7244CF6B5008DF35E /* Resources */,
 				9A9ED8D4244BACB2008DF35E /* Extensions */,
-				9A9ED8C4244AFABC008DF35E /* Environment */,
 				9ADE63932449FF380067EC28 /* AppComponents */,
 				9ADE63A9244A03340067EC28 /* SetupWindow.swift */,
 				9ADE63A8244A03340067EC28 /* Store+Setup.swift */,
@@ -551,7 +551,6 @@
 				9ADE63A72449FF380067EC28 /* Substate.swift in Sources */,
 				9A2DA1B22453993E003E1177 /* CreateAccountMiddleware.swift in Sources */,
 				9AB17A252450E14700F07577 /* Zip.swift in Sources */,
-				9A9ED8D3244B1F4F008DF35E /* NoteDetailsMiddleware.swift in Sources */,
 				9ADE63A02449FF380067EC28 /* Configure.swift in Sources */,
 				9AB51F88245813970041728D /* KeychainAccessService.swift in Sources */,
 				9AB17A2C2452056500F07577 /* ConnectAccountViewController.swift in Sources */,
@@ -568,6 +567,7 @@
 				9ADE63B7244A12440067EC28 /* LaunchPresenter.swift in Sources */,
 				9ADE63B8244A12440067EC28 /* LaunchMiddleware.swift in Sources */,
 				9AB51F8C24581BDB0041728D /* Throwing.swift in Sources */,
+				9A2443FC247D466100174D4A /* StoredNote+CoreDataProperties.swift in Sources */,
 				9A9ED8C6244AFAD8008DF35E /* Environment.swift in Sources */,
 				9ADE63A52449FF380067EC28 /* Deallocator.swift in Sources */,
 				9A9ED8CF244B06A5008DF35E /* NoteDetailsRouter.swift in Sources */,

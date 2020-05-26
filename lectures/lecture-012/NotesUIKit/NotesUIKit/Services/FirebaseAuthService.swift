@@ -41,6 +41,8 @@ public struct FirebaseAuthService {
         Auth.auth().currentUser.map { Self.prepareFirebaseUser($0) }
     }
     
+    public var signOut = { fromThrowing(Auth.auth().signOut)() }
+    
     private static func prepareFirebaseUser(_ firebaseUser: FirebaseAuth.User) -> User {
         let handler: (@escaping (Result<String, Error>) -> Void) -> Void = { callback in
             firebaseUser.getIDToken {

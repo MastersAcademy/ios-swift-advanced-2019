@@ -3,8 +3,8 @@ import Foundation
 var Current = Environment()
 
 public struct Environment {
-    public var date = { Date() }
-    public var uuid = { UUID() }
+    public var date = DateProvider()
+    public var uuid = UUIDProvider()
     public var locale = Locale.autoupdatingCurrent
     public var calendar = Calendar.autoupdatingCurrent
     public var timeZone = TimeZone.autoupdatingCurrent
@@ -45,6 +45,8 @@ public extension Environment {
         public var read = NotesStorage.default.read
         public var update = NotesStorage.default.update
         public var delete = NotesStorage.default.delete
+        public var withID = NotesStorage.default.note
+        public var createOrUpdateList = NotesStorage.default.createOrUpdate
     }
     
     struct Logging {
@@ -83,6 +85,16 @@ public extension Environment {
                 NSSetUncaughtExceptionHandler(nil)
             }
         }
+    }
+    
+    struct DateProvider {
+        public var date = { Date() }
+        public var timeIntervalSince1970 = { Date(timeIntervalSince1970: $0) }
+    }
+    
+    struct UUIDProvider {
+        public var uuid: () -> UUID = { UUID() }
+        public var fromUUIDString  = UUID.init(uuidString:)
     }
 }
 

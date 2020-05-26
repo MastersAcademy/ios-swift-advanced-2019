@@ -1,5 +1,6 @@
 import SwiftyReduxCore
 import SwiftyReduxSideEffects
+import CasePaths
 
 public let launchMiddleware: Middleware<AppState> = createSideEffectMiddleware { getState, dispatch in
     return { action in
@@ -20,7 +21,7 @@ public extension LaunchEffect {
             Current.exceptionHandler.setEnabled(true)
             // Firebase needs to be configured on main thread
             Current.const.queue.main.sync (execute: Current.firebase.configure)
-            Current.firebase.firestore.setLoggingEnabled(true)
+            Current.firebase.firestore.setLoggingEnabled(false)
             Current.firebase.firestore.setPersistenceEnabled(true)
             
             // load all notes stored in local database
@@ -43,43 +44,26 @@ public extension LaunchEffect {
 
             // a) try to read token directly from SDK
             if let user = Current.firebase.auth.user() {
-                Self.retrieveAndStoreToken(from: user) { _ in
+                Self.retrieveToken(from: user) { _ in
                      dispatch(AccountAction.setUser(AccountState.User(uid: user.uid, email: user.email)))
-                    Current.firestoreNotes.loadAllNotes(cached: false, userId: user.uid) { allNotesResult in
-                        switch allNotesResult {
-                        case let .success(fireStoreNotes):
-                            let (stored, cloud) = Self.getDiffNotes(stored: storedNotes, cloud: fireStoreNotes)
-                            
-                            
-                            
-                            break
-                        case let .failure(error):
-                            echoError(error)
-                        }
-                        
-                        
-                        dispatch(NavigationAction.navigate(.noteList))
-                    }
+                    // subscribe to remote db changes for current user
+                    dispatch(NoteListEffect.startListenRemoteNotes)
+                    dispatch(NavigationAction.navigate(.noteList))
                 }
-            // b) if SDK doesn't provide token - try get one from secure local storage and sign-in with it
-            } else if let token = try? Current.secureStorage.readFirebaseAuthToken().get() {
-                Current.firebase.auth.signInWithToken(token) { result in
-                    switch result {
-                    case let .success(user):
-                        Self.retrieveAndStoreToken(from: user) { _ in
-                             dispatch(AccountAction.setUser(AccountState.User(uid: user.uid, email: user.email)))
-                        }
-                    case let .failure(error):
+            // b) user account is not connected - proceed with local database only
+            } else {
+                // clear firestore cache since it is not used for user that is not logged-in
+                Current.firestoreNotes.clearStoredNotes { result in
+                    if let error = extract(case: Result.failure, from: result) {
                         echoError(error)
                     }
+                    dispatch(NavigationAction.navigate(.noteList))
                 }
-            // c) user account is not connected - proceed with local database only
-            } else {
                 
             }
         }
     }
-    
+    /*
     static func getDiffNotes(stored: [NotesStorage.Note], cloud: [FirestoreNotesService.Note])
         -> (stored: [NotesStorage.Note], cloud: [FirestoreNotesService.Note]) {
         // store notes in dictionaries by their ids
@@ -126,11 +110,11 @@ public extension LaunchEffect {
         
         return (newFromStored, newFromCloud)
     }
-    
-    static func retrieveAndStoreToken(from user: FirebaseAuthService.User,
+    */
+    static func retrieveToken(from user: FirebaseAuthService.User,
                                       callback: @escaping (Result<Void, Error>) -> Void) {
         user.getIDToken { result in
-            switch result.flatMap(Current.secureStorage.storeFirebaseAuthToken) {
+            switch result {
             case .success: callback(.success(()))
             case let .failure(error): echoError(error)
             }
