@@ -3,8 +3,8 @@ import Foundation
 var Current = Environment()
 
 public struct Environment {
-    public var date = { Date() }
-    public var uuid = { UUID() }
+    public var date = DateProvider()
+    public var uuid = UUIDProvider()
     public var locale = Locale.autoupdatingCurrent
     public var calendar = Calendar.autoupdatingCurrent
     public var timeZone = TimeZone.autoupdatingCurrent
@@ -19,8 +19,16 @@ public struct Environment {
     public var const = Const()
     public var noteStorage = NotesStorageProvider()
     public var logging = Logging()
+    public var firebase = FirebaseProvider()
+    public var exceptionHandler = ExceptionHandler()
+    public var validation = Validation()
+    public var firestoreNotes = FirestoreNotesService()
+    public var keychain = KeychainAccessService()
+    public var secureStorage = SecureStorageSevice()
 }
 
+
+import Firebase
 
 public extension Environment {
     struct Const {
@@ -28,6 +36,8 @@ public extension Environment {
                                                                         in: .userDomainMask)[0]
             .appendingPathComponent("notes", isDirectory: true)
         public var logging = (actions: false, errors: true)
+        public var queue = (main: DispatchQueue.main, global: DispatchQueue.global(qos: .default))
+        public var validation = (minPasswordLength: 8, maxPasswordLength: Int.max)
     }
     
     struct NotesStorageProvider {
@@ -35,6 +45,8 @@ public extension Environment {
         public var read = NotesStorage.default.read
         public var update = NotesStorage.default.update
         public var delete = NotesStorage.default.delete
+        public var withID = NotesStorage.default.note
+        public var createOrUpdateList = NotesStorage.default.createOrUpdate
     }
     
     struct Logging {
@@ -51,6 +63,38 @@ public extension Environment {
         }
     
         public var log = { print($0, terminator: $1) }
+    }
+    
+    struct FirebaseProvider {
+        public var configure = FirebaseApp.configure as () -> Void
+        public var firestore = FirestoreService()
+        public var auth = FirebaseAuthService()
+    }
+    
+    struct ExceptionHandler {
+        public var setEnabled: (Bool) -> Void = { isEnabled in
+            if isEnabled {
+                    NSSetUncaughtExceptionHandler({ exception in
+                      print("!!!!!!!!! CRASHLOG START !!!!!!!!!")
+                      print("Exception name: " + exception.name.rawValue)
+                      print("Exception reason: ", exception.reason ?? "nil")
+                      print("Exception callStackSymbols: ", exception.callStackSymbols)
+                      print("!!!!!!!!! CRASHLOG END !!!!!!!!!")
+                })
+            } else {
+                NSSetUncaughtExceptionHandler(nil)
+            }
+        }
+    }
+    
+    struct DateProvider {
+        public var date = { Date() }
+        public var timeIntervalSince1970 = { Date(timeIntervalSince1970: $0) }
+    }
+    
+    struct UUIDProvider {
+        public var uuid: () -> UUID = { UUID() }
+        public var fromUUIDString  = UUID.init(uuidString:)
     }
 }
 

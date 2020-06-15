@@ -5,6 +5,7 @@ public struct NoteListState: Substate {
     
     public var list = [Note.ID]()
     public var notes = [Note.ID: Note]()
+    public var shouldSyncFromCache = false
 }
 
 // MARK: Action
@@ -13,6 +14,8 @@ public enum NoteListAction: Action {
     case updateNote(id: NoteListState.Note.ID, content: String, date: Date)
     case removeNote(NoteListState.Note.ID)
     case addNotes([NoteListState.Note])
+    case shouldSyncFromCache(Bool)
+    case reset
 }
 
 
@@ -49,14 +52,16 @@ public extension NoteListState {
         case let .addNotes(notes):
             for note in notes {
                 guard state.notes[note.id] == nil else {
-                    assertionFailure("note has been already added")
+                    echo(level: .warning, "note has been already added")
                     continue
                 }
                 state.list.append(note.id)
                 state.notes[note.id] = note
             }
-            
-            
+        case let .shouldSyncFromCache(sync):
+            state.shouldSyncFromCache = sync
+        case .reset:
+            state = .init()
         }
     }
 }

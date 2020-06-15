@@ -21,15 +21,27 @@ public final class NoteListPresenter: Presentable {
     }
     
     public func stateToProps(_ state: AppState) -> NoteListViewController.Props {
-        if state.navigation.screen == .noteDetails {
-            router.showNoteDetails()
+        switch state.navigation.screen {
+        case .noteDetails: router.showNoteDetails()
+        case .connectUserAccount: router.showConnectAccount()
+        case .disconnectUserAccount:
+            let handleDisconnectTap = Command<Void> { [dispatcher] in
+                dispatcher.dispatch(NavigationAction.navigate(.confirmDisconnectUserAccount))
+            }
+            router.showDisconnectAccount(account: state.account.user?.email ?? "", disconnectTap: handleDisconnectTap)
+        case .confirmDisconnectUserAccount:
+            let handleConfirmTap = Command<Void> { [dispatcher] in
+                dispatcher.dispatch(ConnectAccountEffect.requestSignOut)
+            }
+            router.showConfirmDisconnectAccountAlert(confirmTap: handleConfirmTap)
+        default: break
         }
         
         let handleAddTap = Command<Void> { [dispatcher] in
             dispatcher.dispatch(NoteListEffect.createNote)
         }
         
-        let noteToProps: (NoteListState.Note) -> Props.Note = {  [dispatcher, dateFormatter] note in
+        let noteToProps: (NoteListState.Note) -> Props.Note = { [dispatcher, dateFormatter] note in
             let handleTap = Command<Void> {
                 dispatcher.dispatch(NoteListEffect.editNote(note.id))
             }
@@ -37,7 +49,6 @@ public final class NoteListPresenter: Presentable {
             let handleDeleteTap = Command<Void> { [dispatcher] in
                 dispatcher.dispatch(NoteListEffect.removeNote(note.id))
             }
-            
             
             let item = Props.Note(title: note.content.isEmpty ? "Note" : note.content, tap: handleTap,
                                   date: dateFormatter.string(from: note.updatedAt), deleteTap: handleDeleteTap)
@@ -48,9 +59,19 @@ public final class NoteListPresenter: Presentable {
             .compactMap { noteId in state.noteList.notes[noteId] }
             .map(noteToProps)
         
-        return NoteListViewController.Props(title: "Notes",
-                                            notes: notes,
-                                            addTap: handleAddTap)
+        let account: Props.Account
+        
+        switch state.account.user {
+        case .some: account = .disconnect(Command { [dispatcher] in
+            dispatcher.dispatch(NavigationAction.navigate(.disconnectUserAccount))
+        })
+        case .none: account = .connect(Command { [dispatcher] in
+            dispatcher.dispatch(NavigationAction.navigate(.connectUserAccount))
+        })
+        }
+        
+        return NoteListViewController.Props(title: "Notes", notes: notes,
+                                            addTap: handleAddTap, account: account)
     }
 }
 

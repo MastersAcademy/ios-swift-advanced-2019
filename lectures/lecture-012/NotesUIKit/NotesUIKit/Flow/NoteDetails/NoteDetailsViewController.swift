@@ -45,6 +45,10 @@ public class NoteDetailsViewController: UIViewController, PropsAssignable {
             }
         }
     }
+    
+    deinit {
+        textView.setKeyboardInsetsDisabled()
+    }
 }
 
 public extension NoteDetailsViewController {

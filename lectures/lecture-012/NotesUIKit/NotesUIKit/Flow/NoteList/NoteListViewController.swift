@@ -1,13 +1,6 @@
-//
-//  ViewController.swift
-//  NotesUIKit
-//
-//  Created by Igor Kravchenko on 17.04.2020.
-//  Copyright © 2020 Igor Kravchenko. All rights reserved.
-//
-
 import UIKit
 import SwiftyReduxCommand
+import CasePaths
 
 public class NoteListViewController: UIViewController {
     
@@ -45,6 +38,7 @@ public class NoteListViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                                    target: self,
                                                                    action: #selector(handleAddTap))
+       
     }
     
     private func render(props: Props) {
@@ -55,12 +49,50 @@ public class NoteListViewController: UIViewController {
         } else {
             tableView.reloadData()
         }
+        renderedAccount = props.account
+    }
+    
+    private func renderConnectUserButton() {
+        navigationItem.leftBarButtonItem =
+                   UIBarButtonItem(image: UIImage(systemName: "link.icloud.fill"),
+                                   style: .plain,
+                                   target: self,
+                                   action: #selector(handleConnectUserTap))
+    }
+    
+    private func renderDisconnectUserButton() {
+        navigationItem.leftBarButtonItem =
+                   UIBarButtonItem(image: UIImage(systemName: "icloud.fill"),
+                                   style: .plain,
+                                   target: self,
+                                   action: #selector(handleDisconnectUserTap))
+    }
+    
+    private var renderedAccount: Props.Account? = nil {
+        didSet {
+            switch (renderedAccount, oldValue) {
+            case (.none, .none), (.none, .some): navigationItem.leftBarButtonItem = nil
+            case (.connect, .disconnect), (.connect, .none): renderConnectUserButton()
+            case (.disconnect, .connect), (.disconnect, .none): renderDisconnectUserButton()
+            case (.connect, .connect), (.disconnect, .disconnect): break
+            }
+        }
     }
     
     
     @objc
     private func handleAddTap() {
         props.addTap.execute()
+    }
+    
+    @objc
+    private func handleConnectUserTap() {
+        extract(case: Props.Account.connect, from: props.account)?.execute()
+    }
+    
+    @objc
+    private func handleDisconnectUserTap() {
+        extract(case: Props.Account.disconnect, from: props.account)?.execute()
     }
 
 }
@@ -70,11 +102,15 @@ extension NoteListViewController: PropsAssignable {
         public let title: String
         public let notes: [Note]
         public let addTap: Command<Void>
+        public let account: Account
         
-        public init(title: String = "", notes: [Note] = [], addTap: Command<Void> = .nop()) {
+        public init(title: String = "", notes: [Note] = [],
+                    addTap: Command<Void> = .nop(),
+                    account: Account = .connect(.nop())) {
             self.title = title
             self.notes = notes
             self.addTap = addTap
+            self.account = account
         }
         
         public struct Note {
@@ -90,6 +126,11 @@ extension NoteListViewController: PropsAssignable {
                 self.date = date
                 self.deleteTap = deleteTap
             }
+        }
+        
+        public enum Account {
+            case connect(Command<Void>)
+            case disconnect(Command<Void>)
         }
     }
     
@@ -150,6 +191,7 @@ public protocol IdentifierProvider {}
 extension IdentifierProvider {
     public static var identifier: String { return "\(Self.self)" }
 }
+
 
 
 

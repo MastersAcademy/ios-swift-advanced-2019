@@ -7,10 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A2443FC247D466100174D4A /* StoredNote+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2443FB247D466100174D4A /* StoredNote+CoreDataProperties.swift */; };
+		9A2DA1AE24537A50003E1177 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2DA1AD24537A50003E1177 /* Validation.swift */; };
+		9A2DA1B024538BA2003E1177 /* ConnectAccountMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2DA1AF24538BA2003E1177 /* ConnectAccountMiddleware.swift */; };
+		9A2DA1B22453993E003E1177 /* CreateAccountMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2DA1B12453993E003E1177 /* CreateAccountMiddleware.swift */; };
+		9A2DA1B42454C636003E1177 /* FirestoreNotesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2DA1B32454C636003E1177 /* FirestoreNotesService.swift */; };
+		9A2DA1B62454CFAC003E1177 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2DA1B52454CFAC003E1177 /* FirebaseAuthService.swift */; };
 		9A4F32A4244A4192006D43FD /* NoteListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4F32A3244A4192006D43FD /* NoteListState.swift */; };
 		9A4F32A6244A43D2006D43FD /* NoteListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4F32A5244A43D2006D43FD /* NoteListRouter.swift */; };
+		9A5DB118DAE14107FD2DD101 /* Pods_NotesUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F4B7DF8A8DD3F9C380423B /* Pods_NotesUIKit.framework */; };
 		9A8F4DFC244F3AEA004EFC42 /* NavigationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8F4DFB244F3AEA004EFC42 /* NavigationMiddleware.swift */; };
 		9A8F4DFE244F3B7B004EFC42 /* LoggingMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8F4DFD244F3B7B004EFC42 /* LoggingMiddleware.swift */; };
+		9A9A766924524E1F008E6C6A /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9A766824524E1F008E6C6A /* CreateAccountViewController.swift */; };
+		9A9A766B24524E3B008E6C6A /* CreateAccountState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9A766A24524E3B008E6C6A /* CreateAccountState.swift */; };
+		9A9A766D24524E53008E6C6A /* CreateAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9A766C24524E53008E6C6A /* CreateAccountPresenter.swift */; };
+		9A9A766F24524E6A008E6C6A /* CreateAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9A766E24524E6A008E6C6A /* CreateAccountRouter.swift */; };
 		9A9ED8C3244A533D008DF35E /* NoteListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8C2244A533D008DF35E /* NoteListPresenter.swift */; };
 		9A9ED8C6244AFAD8008DF35E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8C5244AFAD8008DF35E /* Environment.swift */; };
 		9A9ED8C9244AFCE2008DF35E /* NoteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8C8244AFCE2008DF35E /* NoteDetailsViewController.swift */; };
@@ -18,13 +29,24 @@
 		9A9ED8CD244B0676008DF35E /* NoteDetailsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8CC244B0676008DF35E /* NoteDetailsState.swift */; };
 		9A9ED8CF244B06A5008DF35E /* NoteDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8CE244B06A5008DF35E /* NoteDetailsRouter.swift */; };
 		9A9ED8D1244B06FE008DF35E /* NoteDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8D0244B06FE008DF35E /* NoteDetailsPresenter.swift */; };
-		9A9ED8D3244B1F4F008DF35E /* NoteDetailsMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8D2244B1F4F008DF35E /* NoteDetailsMiddleware.swift */; };
 		9A9ED8D6244BACCE008DF35E /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8D5244BACCE008DF35E /* UIScrollView.swift */; };
 		9A9ED8DA244CF709008DF35E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8D8244CF709008DF35E /* DataModel.xcdatamodeld */; };
 		9A9ED8DE244CF8F4008DF35E /* StoredNote+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8DC244CF8F4008DF35E /* StoredNote+CoreDataClass.swift */; };
-		9A9ED8DF244CF8F4008DF35E /* StoredNote+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8DD244CF8F4008DF35E /* StoredNote+CoreDataProperties.swift */; };
 		9A9ED8E2244E418B008DF35E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8E1244E418B008DF35E /* CoreDataStack.swift */; };
 		9A9ED8E4244E41E0008DF35E /* NotesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8E3244E41E0008DF35E /* NotesStorage.swift */; };
+		9AB17A252450E14700F07577 /* Zip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB17A242450E14700F07577 /* Zip.swift */; };
+		9AB17A272450EB6800F07577 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AB17A262450EB6800F07577 /* GoogleService-Info.plist */; };
+		9AB17A292450F2C100F07577 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB17A282450F2C100F07577 /* FirestoreService.swift */; };
+		9AB17A2C2452056500F07577 /* ConnectAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB17A2B2452056500F07577 /* ConnectAccountViewController.swift */; };
+		9AB17A2E24520A4100F07577 /* ConnectAccountState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB17A2D24520A4100F07577 /* ConnectAccountState.swift */; };
+		9AB17A3024520CDC00F07577 /* ConnectAccountPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB17A2F24520CDC00F07577 /* ConnectAccountPresenter.swift */; };
+		9AB17A3224520CFF00F07577 /* ConnectAccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB17A3124520CFF00F07577 /* ConnectAccountRouter.swift */; };
+		9AB51F86245813040041728D /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 9AB51F85245813040041728D /* KeychainAccess */; };
+		9AB51F88245813970041728D /* KeychainAccessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB51F87245813970041728D /* KeychainAccessService.swift */; };
+		9AB51F8A245817B00041728D /* SecureStorageSevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB51F89245817B00041728D /* SecureStorageSevice.swift */; };
+		9AB51F8C24581BDB0041728D /* Throwing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB51F8B24581BDB0041728D /* Throwing.swift */; };
+		9AB51F8E2458D9C40041728D /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB51F8D2458D9C40041728D /* Result.swift */; };
+		9AD2A98024562BB20032254A /* AccountState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD2A97F24562BB20032254A /* AccountState.swift */; };
 		9ADE63772449C86B0067EC28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADE63762449C86B0067EC28 /* AppDelegate.swift */; };
 		9ADE63792449C86B0067EC28 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADE63782449C86B0067EC28 /* SceneDelegate.swift */; };
 		9ADE637B2449C86B0067EC28 /* NoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADE637A2449C86B0067EC28 /* NoteListViewController.swift */; };
@@ -51,13 +73,25 @@
 		9ADE63B8244A12440067EC28 /* LaunchMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADE63B5244A12440067EC28 /* LaunchMiddleware.swift */; };
 		9ADE63B9244A12440067EC28 /* LaunchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADE63B6244A12440067EC28 /* LaunchState.swift */; };
 		9ADE63BC244A348A0067EC28 /* NavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADE63BB244A348A0067EC28 /* NavigationState.swift */; };
+		9AE2C08A245CA02A00671945 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 9AE2C089245CA02A00671945 /* CasePaths */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84F4B7DF8A8DD3F9C380423B /* Pods_NotesUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotesUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A2443FB247D466100174D4A /* StoredNote+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StoredNote+CoreDataProperties.swift"; path = "/Users/igorkravchenko/Documents/Projects/MA/ios-swift-advanced-2019/lectures/lecture-012/NotesUIKit/NotesUIKit/Resources/Generated/StoredNote+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		9A2DA1AD24537A50003E1177 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		9A2DA1AF24538BA2003E1177 /* ConnectAccountMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountMiddleware.swift; sourceTree = "<group>"; };
+		9A2DA1B12453993E003E1177 /* CreateAccountMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountMiddleware.swift; sourceTree = "<group>"; };
+		9A2DA1B32454C636003E1177 /* FirestoreNotesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreNotesService.swift; sourceTree = "<group>"; };
+		9A2DA1B52454CFAC003E1177 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
 		9A4F32A3244A4192006D43FD /* NoteListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListState.swift; sourceTree = "<group>"; };
 		9A4F32A5244A43D2006D43FD /* NoteListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListRouter.swift; sourceTree = "<group>"; };
 		9A8F4DFB244F3AEA004EFC42 /* NavigationMiddleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationMiddleware.swift; sourceTree = "<group>"; };
 		9A8F4DFD244F3B7B004EFC42 /* LoggingMiddleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingMiddleware.swift; sourceTree = "<group>"; };
+		9A9A766824524E1F008E6C6A /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		9A9A766A24524E3B008E6C6A /* CreateAccountState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountState.swift; sourceTree = "<group>"; };
+		9A9A766C24524E53008E6C6A /* CreateAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountPresenter.swift; sourceTree = "<group>"; };
+		9A9A766E24524E6A008E6C6A /* CreateAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountRouter.swift; sourceTree = "<group>"; };
 		9A9ED8C2244A533D008DF35E /* NoteListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListPresenter.swift; sourceTree = "<group>"; };
 		9A9ED8C5244AFAD8008DF35E /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		9A9ED8C8244AFCE2008DF35E /* NoteDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsViewController.swift; sourceTree = "<group>"; };
@@ -65,13 +99,23 @@
 		9A9ED8CC244B0676008DF35E /* NoteDetailsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsState.swift; sourceTree = "<group>"; };
 		9A9ED8CE244B06A5008DF35E /* NoteDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsRouter.swift; sourceTree = "<group>"; };
 		9A9ED8D0244B06FE008DF35E /* NoteDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsPresenter.swift; sourceTree = "<group>"; };
-		9A9ED8D2244B1F4F008DF35E /* NoteDetailsMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailsMiddleware.swift; sourceTree = "<group>"; };
 		9A9ED8D5244BACCE008DF35E /* UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		9A9ED8D9244CF709008DF35E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		9A9ED8DC244CF8F4008DF35E /* StoredNote+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredNote+CoreDataClass.swift"; sourceTree = "<group>"; };
-		9A9ED8DD244CF8F4008DF35E /* StoredNote+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredNote+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9A9ED8E1244E418B008DF35E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9A9ED8E3244E41E0008DF35E /* NotesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesStorage.swift; sourceTree = "<group>"; };
+		9AB17A242450E14700F07577 /* Zip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zip.swift; sourceTree = "<group>"; };
+		9AB17A262450EB6800F07577 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9AB17A282450F2C100F07577 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		9AB17A2B2452056500F07577 /* ConnectAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountViewController.swift; sourceTree = "<group>"; };
+		9AB17A2D24520A4100F07577 /* ConnectAccountState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountState.swift; sourceTree = "<group>"; };
+		9AB17A2F24520CDC00F07577 /* ConnectAccountPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountPresenter.swift; sourceTree = "<group>"; };
+		9AB17A3124520CFF00F07577 /* ConnectAccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectAccountRouter.swift; sourceTree = "<group>"; };
+		9AB51F87245813970041728D /* KeychainAccessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccessService.swift; sourceTree = "<group>"; };
+		9AB51F89245817B00041728D /* SecureStorageSevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorageSevice.swift; sourceTree = "<group>"; };
+		9AB51F8B24581BDB0041728D /* Throwing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throwing.swift; sourceTree = "<group>"; };
+		9AB51F8D2458D9C40041728D /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		9AD2A97F24562BB20032254A /* AccountState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountState.swift; sourceTree = "<group>"; };
 		9ADE63732449C86A0067EC28 /* NotesUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotesUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ADE63762449C86B0067EC28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9ADE63782449C86B0067EC28 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +141,8 @@
 		9ADE63B5244A12440067EC28 /* LaunchMiddleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchMiddleware.swift; sourceTree = "<group>"; };
 		9ADE63B6244A12440067EC28 /* LaunchState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchState.swift; sourceTree = "<group>"; };
 		9ADE63BB244A348A0067EC28 /* NavigationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationState.swift; sourceTree = "<group>"; };
+		AC35DCA6440AF6D0EFC2E9B6 /* Pods-NotesUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotesUIKit.debug.xcconfig"; path = "Target Support Files/Pods-NotesUIKit/Pods-NotesUIKit.debug.xcconfig"; sourceTree = "<group>"; };
+		F91757909E7FB95F71C01B38 /* Pods-NotesUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotesUIKit.release.xcconfig"; path = "Target Support Files/Pods-NotesUIKit/Pods-NotesUIKit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,12 +153,32 @@
 				9ADE638E2449CA240067EC28 /* Command in Frameworks */,
 				9ADE63902449CA240067EC28 /* SideEffects in Frameworks */,
 				9ADE638C2449CA240067EC28 /* Core in Frameworks */,
+				9A5DB118DAE14107FD2DD101 /* Pods_NotesUIKit.framework in Frameworks */,
+				9AB51F86245813040041728D /* KeychainAccess in Frameworks */,
+				9AE2C08A245CA02A00671945 /* CasePaths in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		108679149BA37D43B75101DF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84F4B7DF8A8DD3F9C380423B /* Pods_NotesUIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1997D454053FEF9E5B969BA9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AC35DCA6440AF6D0EFC2E9B6 /* Pods-NotesUIKit.debug.xcconfig */,
+				F91757909E7FB95F71C01B38 /* Pods-NotesUIKit.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		9A4F32A2244A40AA006D43FD /* NoteList */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +189,18 @@
 				9A9ED8CA244AFEB6008DF35E /* NoteListMiddleware.swift */,
 			);
 			path = NoteList;
+			sourceTree = "<group>";
+		};
+		9A9A766724524DFD008E6C6A /* CreateAccount */ = {
+			isa = PBXGroup;
+			children = (
+				9A9A766824524E1F008E6C6A /* CreateAccountViewController.swift */,
+				9A9A766A24524E3B008E6C6A /* CreateAccountState.swift */,
+				9A9A766C24524E53008E6C6A /* CreateAccountPresenter.swift */,
+				9A9A766E24524E6A008E6C6A /* CreateAccountRouter.swift */,
+				9A2DA1B12453993E003E1177 /* CreateAccountMiddleware.swift */,
+			);
+			path = CreateAccount;
 			sourceTree = "<group>";
 		};
 		9A9ED8C4244AFABC008DF35E /* Environment */ = {
@@ -140,7 +218,6 @@
 				9A9ED8CC244B0676008DF35E /* NoteDetailsState.swift */,
 				9A9ED8CE244B06A5008DF35E /* NoteDetailsRouter.swift */,
 				9A9ED8D0244B06FE008DF35E /* NoteDetailsPresenter.swift */,
-				9A9ED8D2244B1F4F008DF35E /* NoteDetailsMiddleware.swift */,
 			);
 			path = NoteDetails;
 			sourceTree = "<group>";
@@ -148,7 +225,10 @@
 		9A9ED8D4244BACB2008DF35E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9AB17A242450E14700F07577 /* Zip.swift */,
 				9A9ED8D5244BACCE008DF35E /* UIScrollView.swift */,
+				9AB51F8B24581BDB0041728D /* Throwing.swift */,
+				9AB51F8D2458D9C40041728D /* Result.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -156,6 +236,7 @@
 		9A9ED8D7244CF6B5008DF35E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9AB17A262450EB6800F07577 /* GoogleService-Info.plist */,
 				9A9ED8DB244CF8BD008DF35E /* Generated */,
 				9A9ED8D8244CF709008DF35E /* DataModel.xcdatamodeld */,
 			);
@@ -165,8 +246,8 @@
 		9A9ED8DB244CF8BD008DF35E /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				9A2443FB247D466100174D4A /* StoredNote+CoreDataProperties.swift */,
 				9A9ED8DC244CF8F4008DF35E /* StoredNote+CoreDataClass.swift */,
-				9A9ED8DD244CF8F4008DF35E /* StoredNote+CoreDataProperties.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -176,6 +257,12 @@
 			children = (
 				9A9ED8E1244E418B008DF35E /* CoreDataStack.swift */,
 				9A9ED8E3244E41E0008DF35E /* NotesStorage.swift */,
+				9AB17A282450F2C100F07577 /* FirestoreService.swift */,
+				9A2DA1AD24537A50003E1177 /* Validation.swift */,
+				9A2DA1B32454C636003E1177 /* FirestoreNotesService.swift */,
+				9A2DA1B52454CFAC003E1177 /* FirebaseAuthService.swift */,
+				9AB51F87245813970041728D /* KeychainAccessService.swift */,
+				9AB51F89245817B00041728D /* SecureStorageSevice.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -183,6 +270,9 @@
 		9AB17A19244F631200F07577 /* Flow */ = {
 			isa = PBXGroup;
 			children = (
+				9AD2A97E24562B720032254A /* User */,
+				9A9A766724524DFD008E6C6A /* CreateAccount */,
+				9AB17A2A245204CE00F07577 /* ConnectAccount */,
 				9ADE63AF244A0D850067EC28 /* App */,
 				9ADE63AE244A0BF40067EC28 /* Launch */,
 				9A4F32A2244A40AA006D43FD /* NoteList */,
@@ -192,11 +282,33 @@
 			path = Flow;
 			sourceTree = "<group>";
 		};
+		9AB17A2A245204CE00F07577 /* ConnectAccount */ = {
+			isa = PBXGroup;
+			children = (
+				9AB17A2B2452056500F07577 /* ConnectAccountViewController.swift */,
+				9AB17A2D24520A4100F07577 /* ConnectAccountState.swift */,
+				9AB17A2F24520CDC00F07577 /* ConnectAccountPresenter.swift */,
+				9AB17A3124520CFF00F07577 /* ConnectAccountRouter.swift */,
+				9A2DA1AF24538BA2003E1177 /* ConnectAccountMiddleware.swift */,
+			);
+			path = ConnectAccount;
+			sourceTree = "<group>";
+		};
+		9AD2A97E24562B720032254A /* User */ = {
+			isa = PBXGroup;
+			children = (
+				9AD2A97F24562BB20032254A /* AccountState.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		9ADE636A2449C86A0067EC28 = {
 			isa = PBXGroup;
 			children = (
 				9ADE63752449C86A0067EC28 /* NotesUIKit */,
 				9ADE63742449C86A0067EC28 /* Products */,
+				1997D454053FEF9E5B969BA9 /* Pods */,
+				108679149BA37D43B75101DF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -211,11 +323,11 @@
 		9ADE63752449C86A0067EC28 /* NotesUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				9A9ED8C4244AFABC008DF35E /* Environment */,
 				9AB17A19244F631200F07577 /* Flow */,
 				9A9ED8E0244E4167008DF35E /* Services */,
 				9A9ED8D7244CF6B5008DF35E /* Resources */,
 				9A9ED8D4244BACB2008DF35E /* Extensions */,
-				9A9ED8C4244AFABC008DF35E /* Environment */,
 				9ADE63932449FF380067EC28 /* AppComponents */,
 				9ADE63A9244A03340067EC28 /* SetupWindow.swift */,
 				9ADE63A8244A03340067EC28 /* Store+Setup.swift */,
@@ -281,9 +393,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9ADE63872449C86D0067EC28 /* Build configuration list for PBXNativeTarget "NotesUIKit" */;
 			buildPhases = (
+				90F15AC3C368BFA06A4360A4 /* [CP] Check Pods Manifest.lock */,
 				9ADE636F2449C86A0067EC28 /* Sources */,
 				9ADE63702449C86A0067EC28 /* Frameworks */,
 				9ADE63712449C86A0067EC28 /* Resources */,
+				D84F5D8AB8E9BAACDC2451B5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -294,6 +408,8 @@
 				9ADE638B2449CA240067EC28 /* Core */,
 				9ADE638D2449CA240067EC28 /* Command */,
 				9ADE638F2449CA240067EC28 /* SideEffects */,
+				9AB51F85245813040041728D /* KeychainAccess */,
+				9AE2C089245CA02A00671945 /* CasePaths */,
 			);
 			productName = NotesUIKit;
 			productReference = 9ADE63732449C86A0067EC28 /* NotesUIKit.app */;
@@ -325,6 +441,8 @@
 			mainGroup = 9ADE636A2449C86A0067EC28;
 			packageReferences = (
 				9ADE638A2449CA240067EC28 /* XCRemoteSwiftPackageReference "swifty-redux" */,
+				9AB51F84245813040041728D /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				9AE2C088245CA02A00671945 /* XCRemoteSwiftPackageReference "swift-case-paths" */,
 			);
 			productRefGroup = 9ADE63742449C86A0067EC28 /* Products */;
 			projectDirPath = "";
@@ -342,19 +460,65 @@
 			files = (
 				9ADE63832449C86D0067EC28 /* LaunchScreen.storyboard in Resources */,
 				9ADE63802449C86D0067EC28 /* Assets.xcassets in Resources */,
+				9AB17A272450EB6800F07577 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		90F15AC3C368BFA06A4360A4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NotesUIKit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D84F5D8AB8E9BAACDC2451B5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NotesUIKit/Pods-NotesUIKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NotesUIKit/Pods-NotesUIKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NotesUIKit/Pods-NotesUIKit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9ADE636F2449C86A0067EC28 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A2DA1B62454CFAC003E1177 /* FirebaseAuthService.swift in Sources */,
+				9A9A766D24524E53008E6C6A /* CreateAccountPresenter.swift in Sources */,
 				9A4F32A4244A4192006D43FD /* NoteListState.swift in Sources */,
 				9ADE63B3244A10040067EC28 /* LaunchRouter.swift in Sources */,
 				9A9ED8C9244AFCE2008DF35E /* NoteDetailsViewController.swift in Sources */,
+				9AB17A292450F2C100F07577 /* FirestoreService.swift in Sources */,
 				9A9ED8C3244A533D008DF35E /* NoteListPresenter.swift in Sources */,
 				9ADE637B2449C86B0067EC28 /* NoteListViewController.swift in Sources */,
 				9ADE63AD244A04160067EC28 /* LaunchViewController.swift in Sources */,
@@ -363,33 +527,49 @@
 				9A9ED8D1244B06FE008DF35E /* NoteDetailsPresenter.swift in Sources */,
 				9ADE639E2449FF380067EC28 /* SubstateReducer.swift in Sources */,
 				9ADE63B9244A12440067EC28 /* LaunchState.swift in Sources */,
+				9A9A766B24524E3B008E6C6A /* CreateAccountState.swift in Sources */,
 				9A9ED8D6244BACCE008DF35E /* UIScrollView.swift in Sources */,
 				9ADE63A32449FF380067EC28 /* MainQueueObservable.swift in Sources */,
+				9A9A766924524E1F008E6C6A /* CreateAccountViewController.swift in Sources */,
 				9ADE63A62449FF380067EC28 /* Router.swift in Sources */,
+				9AB17A3024520CDC00F07577 /* ConnectAccountPresenter.swift in Sources */,
 				9ADE63A42449FF380067EC28 /* Presenter.swift in Sources */,
 				9A8F4DFE244F3B7B004EFC42 /* LoggingMiddleware.swift in Sources */,
 				9A8F4DFC244F3AEA004EFC42 /* NavigationMiddleware.swift in Sources */,
+				9A9A766F24524E6A008E6C6A /* CreateAccountRouter.swift in Sources */,
 				9ADE63AB244A03340067EC28 /* SetupWindow.swift in Sources */,
 				9A9ED8CD244B0676008DF35E /* NoteDetailsState.swift in Sources */,
+				9AD2A98024562BB20032254A /* AccountState.swift in Sources */,
 				9A9ED8E2244E418B008DF35E /* CoreDataStack.swift in Sources */,
-				9A9ED8DF244CF8F4008DF35E /* StoredNote+CoreDataProperties.swift in Sources */,
+				9A2DA1B024538BA2003E1177 /* ConnectAccountMiddleware.swift in Sources */,
 				9A4F32A6244A43D2006D43FD /* NoteListRouter.swift in Sources */,
+				9AB17A2E24520A4100F07577 /* ConnectAccountState.swift in Sources */,
 				9ADE63A72449FF380067EC28 /* Substate.swift in Sources */,
-				9A9ED8D3244B1F4F008DF35E /* NoteDetailsMiddleware.swift in Sources */,
+				9A2DA1B22453993E003E1177 /* CreateAccountMiddleware.swift in Sources */,
+				9AB17A252450E14700F07577 /* Zip.swift in Sources */,
 				9ADE63A02449FF380067EC28 /* Configure.swift in Sources */,
+				9AB51F88245813970041728D /* KeychainAccessService.swift in Sources */,
+				9AB17A2C2452056500F07577 /* ConnectAccountViewController.swift in Sources */,
 				9A9ED8CB244AFEB6008DF35E /* NoteListMiddleware.swift in Sources */,
 				9ADE63AA244A03340067EC28 /* Store+Setup.swift in Sources */,
 				9A9ED8DA244CF709008DF35E /* DataModel.xcdatamodeld in Sources */,
+				9A2DA1B42454C636003E1177 /* FirestoreNotesService.swift in Sources */,
 				9ADE63772449C86B0067EC28 /* AppDelegate.swift in Sources */,
+				9A2DA1AE24537A50003E1177 /* Validation.swift in Sources */,
+				9AB17A3224520CFF00F07577 /* ConnectAccountRouter.swift in Sources */,
 				9ADE63B1244A0D950067EC28 /* AppState.swift in Sources */,
 				9ADE63A12449FF380067EC28 /* Store+Deallocator.swift in Sources */,
 				9ADE63792449C86B0067EC28 /* SceneDelegate.swift in Sources */,
 				9ADE63B7244A12440067EC28 /* LaunchPresenter.swift in Sources */,
 				9ADE63B8244A12440067EC28 /* LaunchMiddleware.swift in Sources */,
+				9AB51F8C24581BDB0041728D /* Throwing.swift in Sources */,
+				9A2443FC247D466100174D4A /* StoredNote+CoreDataProperties.swift in Sources */,
 				9A9ED8C6244AFAD8008DF35E /* Environment.swift in Sources */,
 				9ADE63A52449FF380067EC28 /* Deallocator.swift in Sources */,
 				9A9ED8CF244B06A5008DF35E /* NoteDetailsRouter.swift in Sources */,
 				9ADE63BC244A348A0067EC28 /* NavigationState.swift in Sources */,
+				9AB51F8E2458D9C40041728D /* Result.swift in Sources */,
+				9AB51F8A245817B00041728D /* SecureStorageSevice.swift in Sources */,
 				9ADE639F2449FF380067EC28 /* Dispatcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,6 +704,7 @@
 		};
 		9ADE63882449C86D0067EC28 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC35DCA6440AF6D0EFC2E9B6 /* Pods-NotesUIKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -532,7 +713,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.igorkravchenko.NotesUIKit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.mastersacademy.NotesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -541,6 +722,7 @@
 		};
 		9ADE63892449C86D0067EC28 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F91757909E7FB95F71C01B38 /* Pods-NotesUIKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -549,7 +731,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.igorkravchenko.NotesUIKit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.mastersacademy.NotesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -580,6 +762,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9AB51F84245813040041728D /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
+			};
+		};
 		9ADE638A2449CA240067EC28 /* XCRemoteSwiftPackageReference "swifty-redux" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/igorkravchenko/swifty-redux";
@@ -588,9 +778,22 @@
 				revision = c79ee3ac9d706e4862de58da146b92a5484f1107;
 			};
 		};
+		9AE2C088245CA02A00671945 /* XCRemoteSwiftPackageReference "swift-case-paths" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-case-paths";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9AB51F85245813040041728D /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9AB51F84245813040041728D /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
 		9ADE638B2449CA240067EC28 /* Core */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9ADE638A2449CA240067EC28 /* XCRemoteSwiftPackageReference "swifty-redux" */;
@@ -605,6 +808,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9ADE638A2449CA240067EC28 /* XCRemoteSwiftPackageReference "swifty-redux" */;
 			productName = SideEffects;
+		};
+		9AE2C089245CA02A00671945 /* CasePaths */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9AE2C088245CA02A00671945 /* XCRemoteSwiftPackageReference "swift-case-paths" */;
+			productName = CasePaths;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "KeychainAccess",
+        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess",
+        "state": {
+          "branch": null,
+          "revision": "b920ad7df3c73189dcdd4aa05c540849b2010dbf",
+          "version": "4.1.0"
+        }
+      },
+      {
+        "package": "CasePaths",
+        "repositoryURL": "https://github.com/pointfreeco/swift-case-paths",
+        "state": {
+          "branch": null,
+          "revision": "a9c1e05518b6d95cf5844d823020376f2b6ff842",
+          "version": "0.1.0"
+        }
+      },
+      {
+        "package": "SwiftyRedux",
+        "repositoryURL": "https://github.com/igorkravchenko/swifty-redux",
+        "state": {
+          "branch": null,
+          "revision": "c79ee3ac9d706e4862de58da146b92a5484f1107",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
