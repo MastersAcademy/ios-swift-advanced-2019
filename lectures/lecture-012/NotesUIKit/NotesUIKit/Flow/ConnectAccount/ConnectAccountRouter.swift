@@ -44,4 +44,16 @@ public extension ConnectAccountRouter {
             .first(where: { $0 is NoteListViewController }) else { return }
         currentController?.navigationController?.popToViewController(noteListController, animated: true)
     }
+    
+    func showInvalidEmailOrPasswordAlert(confirm: Command<Void>) {
+        let controller = UIAlertController(title: nil,
+                                           message: "Please make sure you use correct email and password",
+                                           preferredStyle: .alert)
+        let confirmButton = UIAlertAction(title: "OK",
+                                          style: .default) { button in
+                                            confirm.execute()
+        }
+        controller.addAction(confirmButton)
+        currentController?.present(controller, animated: true)
+    }
 }

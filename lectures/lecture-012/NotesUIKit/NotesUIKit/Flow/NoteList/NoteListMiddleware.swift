@@ -149,9 +149,11 @@ public extension NoteListEffect {
             }
         case .removed:
             switch storedNote {
-            case .some:
+            case let .some(note):
                 if let error = extract(case: Result.failure, from: Current.noteStorage.delete(uuid)) {
                     echo(error)
+                } else {
+                    dispatch(NoteListAction.removeNote(note.id))
                 }
             case .none: break
             }

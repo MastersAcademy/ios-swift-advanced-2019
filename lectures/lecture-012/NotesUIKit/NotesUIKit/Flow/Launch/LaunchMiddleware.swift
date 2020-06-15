@@ -21,7 +21,7 @@ public extension LaunchEffect {
             Current.exceptionHandler.setEnabled(true)
             // Firebase needs to be configured on main thread
             Current.const.queue.main.sync (execute: Current.firebase.configure)
-            Current.firebase.firestore.setLoggingEnabled(false)
+            Current.firebase.firestore.setLoggingEnabled(true)
             Current.firebase.firestore.setPersistenceEnabled(true)
             
             // load all notes stored in local database
@@ -63,54 +63,7 @@ public extension LaunchEffect {
             }
         }
     }
-    /*
-    static func getDiffNotes(stored: [NotesStorage.Note], cloud: [FirestoreNotesService.Note])
-        -> (stored: [NotesStorage.Note], cloud: [FirestoreNotesService.Note]) {
-        // store notes in dictionaries by their ids
-        var storedDict = Dictionary.init(uniqueKeysWithValues: stored.map { ($0.id.uuidString, $0 ) })
-        var cloudDict = Dictionary.init(uniqueKeysWithValues: cloud.map { ($0.id, $0 ) })
-        
-        var newFromStored = [NotesStorage.Note]()
-        var newFromCloud = [FirestoreNotesService.Note]()
-
-        // determine which notes are to be synced from local db to cloud and vice versa
-        for storedNote in stored {
-            // check if note exists in cloud
-            let noteId = storedNote.id.uuidString
-            if let cloudNote = cloudDict[noteId] {
-                // check if local note is newer than in cloud
-                if storedNote.updatedAt.timeIntervalSince1970 > cloudNote.updatedAt {
-                    // add to list that will be sinced to cloud
-                    newFromStored.append(storedNote)
-                    // remove note from both dictionaries to avoid
-                    // extra work with cloud dictionary check
-                    storedDict[noteId] = nil
-                    cloudDict[noteId] = nil
-                // check vice versa
-                } else if storedNote.updatedAt.timeIntervalSince1970 < cloudNote.updatedAt {
-                    newFromCloud.append(cloudNote)
-                    storedDict[noteId] = nil
-                    cloudDict[noteId] = nil
-                } // else both dates are identical so no need for sync
-                // note doesn't exist in cloud
-            } else {
-                // add to list that will be sinced to cloud
-                newFromStored.append(storedNote)
-                // remove note from stored dictionary
-                storedDict[noteId] = nil
-            }
-        }
-        
-        // check for notes left to be synced from cloud to local db
-        for cloudPair in cloudDict {
-            if storedDict[cloudPair.key] == nil {
-                newFromCloud.append(cloudPair.value)
-            }
-        }
-        
-        return (newFromStored, newFromCloud)
-    }
-    */
+    
     static func retrieveToken(from user: FirebaseAuthService.User,
                                       callback: @escaping (Result<Void, Error>) -> Void) {
         user.getIDToken { result in

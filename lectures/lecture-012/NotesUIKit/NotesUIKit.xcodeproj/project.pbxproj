@@ -32,7 +32,6 @@
 		9A9ED8D6244BACCE008DF35E /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8D5244BACCE008DF35E /* UIScrollView.swift */; };
 		9A9ED8DA244CF709008DF35E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8D8244CF709008DF35E /* DataModel.xcdatamodeld */; };
 		9A9ED8DE244CF8F4008DF35E /* StoredNote+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8DC244CF8F4008DF35E /* StoredNote+CoreDataClass.swift */; };
-		9A9ED8DF244CF8F4008DF35E /* StoredNote+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8DD244CF8F4008DF35E /* StoredNote+CoreDataProperties.swift */; };
 		9A9ED8E2244E418B008DF35E /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8E1244E418B008DF35E /* CoreDataStack.swift */; };
 		9A9ED8E4244E41E0008DF35E /* NotesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A9ED8E3244E41E0008DF35E /* NotesStorage.swift */; };
 		9AB17A252450E14700F07577 /* Zip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB17A242450E14700F07577 /* Zip.swift */; };
@@ -103,7 +102,6 @@
 		9A9ED8D5244BACCE008DF35E /* UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		9A9ED8D9244CF709008DF35E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		9A9ED8DC244CF8F4008DF35E /* StoredNote+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredNote+CoreDataClass.swift"; sourceTree = "<group>"; };
-		9A9ED8DD244CF8F4008DF35E /* StoredNote+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoredNote+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9A9ED8E1244E418B008DF35E /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9A9ED8E3244E41E0008DF35E /* NotesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesStorage.swift; sourceTree = "<group>"; };
 		9AB17A242450E14700F07577 /* Zip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Zip.swift; sourceTree = "<group>"; };
@@ -250,7 +248,6 @@
 			children = (
 				9A2443FB247D466100174D4A /* StoredNote+CoreDataProperties.swift */,
 				9A9ED8DC244CF8F4008DF35E /* StoredNote+CoreDataClass.swift */,
-				9A9ED8DD244CF8F4008DF35E /* StoredNote+CoreDataProperties.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -545,7 +542,6 @@
 				9AD2A98024562BB20032254A /* AccountState.swift in Sources */,
 				9A9ED8E2244E418B008DF35E /* CoreDataStack.swift in Sources */,
 				9A2DA1B024538BA2003E1177 /* ConnectAccountMiddleware.swift in Sources */,
-				9A9ED8DF244CF8F4008DF35E /* StoredNote+CoreDataProperties.swift in Sources */,
 				9A4F32A6244A43D2006D43FD /* NoteListRouter.swift in Sources */,
 				9AB17A2E24520A4100F07577 /* ConnectAccountState.swift in Sources */,
 				9ADE63A72449FF380067EC28 /* Substate.swift in Sources */,

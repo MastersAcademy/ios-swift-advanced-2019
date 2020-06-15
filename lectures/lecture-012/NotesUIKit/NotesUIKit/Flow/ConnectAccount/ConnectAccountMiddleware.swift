@@ -18,39 +18,37 @@ public extension ConnectAccountEffect {
     func handle(getState: GetState<AppState>, dispatch: @escaping Dispatch) {
         switch self {
         case let .requestSignIn(email, password):
-            let params: FirebaseAuthService.SignInParams = (withEmail: email, password: password,
-                                                            completion: { result in
-                                                                switch result {
-                                                                case let .success(user):
-                                                                    
-                                                                    
-                                                    
-                                                                    let stateUser: AccountState.User = .init(uid: user.uid, email: user.email)
-                                                                    
-                                                                    dispatch(AccountAction.setUser(stateUser))
-                                                                    // Allow sync from cache after sign in.
-                                                                    // It will be then turned off when first
-                                                                    // update kicks in
-                                                                    //dispatch(NoteListAction.shouldSyncFromCache(true))
-                                                                    //dispatch(NoteListEffect.startListenRemoteNotes)
-                                                                    
-                                                                    self.firstTimeSync(userId: user.uid,
-                                                                                       dispatch: dispatch) { result in
-                                                                        switch result {
-                                                                        case .success: dispatch(NavigationAction.navigate(.connectAccountGoBackToNoteList))
-                                                                        case let .failure(error): echoError(error)
-                                                                        }
-                                                                    }
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                                                case let .failure(error):
-                                                                    // TODO: handle errors in UI
-                                                                    echoError(error)
-                                                                }
-            })
+            let params: FirebaseAuthService.SignInParams =
+                (withEmail: email, password: password,
+                 completion: { result in
+                    switch result {
+                    case let .success(user):
+                        let stateUser: AccountState.User = .init(uid: user.uid, email: user.email)
+                        
+                        dispatch(AccountAction.setUser(stateUser))
+                        self.firstTimeSync(userId: user.uid,
+                                           dispatch: dispatch) { result in
+                                            switch result {
+                                            case .success: dispatch(NavigationAction
+                                                .navigate(.connectAccountGoBackToNoteList))
+                                            case let .failure(error):
+                                                echoError(error)
+                                            }
+                        }
+                    case let .failure(error):
+                        if let error = error as? FirebaseAuthService
+                            .ServiceError {
+                            switch error {
+                            case .userNotFound:
+                                dispatch(NavigationAction
+                                    .navigate(.connectAccountInvalidEmailOrPasswordAlert))
+                            case .other: echoError(error)
+                            }
+                        } else {
+                            echoError(error)
+                        }
+                    }
+                })
             Current.firebase.auth.signIn(params)
         case .requestSignOut:
             if let error = extract(case: Result.failure,
@@ -71,19 +69,15 @@ public extension ConnectAccountEffect {
         Current.firestoreNotes.addNotesChangedHandler(userId: userId) { result in
             Current.firestoreNotes.removeNotesChangedHandler()
             let cloudChanges: [(note: FirestoreNotesService.Note, change: FirestoreNotesService.NoteChange)]
-            let cloudCache: Bool
             switch result {
-            case let .success(notes, cache):
-                cloudChanges = notes
-                cloudCache = cache
+            case let .success(notes):
+                cloudChanges = notes.notes
             case let .failure(error):
                 echoError(error)
                 completion(.failure(error))
                 return
             }
-            
-            //guard !cloudCache else { return }
-            
+                        
             let storedNotesResult = Current.noteStorage.read(nil)
             
             let storedNotes: [NotesStorage.Note]
@@ -166,7 +160,6 @@ public extension ConnectAccountEffect {
                     list.append(NoteListState.Note(with: note))
                 }
                 dispatch(NoteListAction.addNotes(list))
-                dispatch(NoteListAction.shouldSyncFromCache(true))
                 dispatch(NoteListEffect.startListenRemoteNotes)
                 
                 completion(.success(()))

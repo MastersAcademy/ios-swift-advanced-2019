@@ -12,6 +12,7 @@ public struct NavigationState: Substate {
         case createUserAccount
         case connectAccountInvalidEmailAlert
         case connectAccountInvalidPasswordAlert
+        case connectAccountInvalidEmailOrPasswordAlert
         case connectAccountGoBackToNoteList
         case createAccountInvalidEmailAlert
         case createAccountInvalidPasswordAlert

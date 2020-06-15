@@ -27,6 +27,8 @@ public class ConnectAccountPresenter: Presentable {
             router.showCreateAccount()
         case .connectAccountGoBackToNoteList:
             router.connectAccountGoBackToNoteList()
+        case .connectAccountInvalidEmailOrPasswordAlert:
+            router.showInvalidEmailOrPasswordAlert(confirm: Command<Void> { })
         default: break
         }
         
